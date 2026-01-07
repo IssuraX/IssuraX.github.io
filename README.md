@@ -1,38 +1,58 @@
-# Portfolio Template (Static)
+# Web Publisher Portfolio — 신동혁
 
-이 템플릿은 **HTML/CSS/JS 정적 사이트**로 구성되어 GitHub Pages에 바로 배포할 수 있습니다.
+웹 퍼블리싱 경력 4년 5개월의 포트폴리오 사이트입니다.  
+에이전시/자체 서비스 환경에서 수행한 구축, 리뉴얼, 운영 경험을 중심으로 정리했습니다.
 
-## 폴더 구조
-- index.html : 메인
-- projects/ : 프로젝트 상세 페이지
-- css/style.css : 스타일
-- js/main.js : 모바일 메뉴/연도 표시
-- assets/ : PDF(이력서/경력기술서) 및 이미지 넣는 곳
+🔗 **Live Site**  
+https://IssuraX.github.io
 
-## 커스터마이징 체크리스트
-1) index.html
-- 이름/소개/핵심역량(칩), 연락처 링크 수정
-- Projects 카드 제목/요약/기간 수정
+## 목적
 
-2) projects/*.html
-- 문제/해결/결과 항목을 본인 경험으로 교체
-- 수치(n%, n건 등) 실제 값으로 교체
-- 스크린샷 자리: assets에 이미지 넣고 <img> 태그로 교체
+이 포트폴리오는 단순 결과물이 아니라,  
+**“어떤 문제를 어떻게 해결했는지”**를 보여주는 데 목적이 있습니다.
 
-3) assets/
-- Resume.pdf, Career.pdf 등 넣고 링크 연결
+각 프로젝트는 아래 기준으로 정리했습니다.
 
-## GitHub Pages 배포(추천)
-1. GitHub에서 새 저장소 생성
-   - 저장소 이름: **username.github.io** (username은 본인 GitHub 아이디)
-2. 이 템플릿 파일을 저장소에 업로드(루트에 index.html이 있어야 함)
-3. GitHub 저장소 → Settings → Pages
-   - Build and deployment: **Deploy from a branch**
-   - Branch: **main** / Folder: **/(root)** 선택 → Save
-4. 몇 초 후 아래 주소로 접속
-   - https://username.github.io
+- 프로젝트 배경
+- 나의 역할과 기여도
+- 문제 상황
+- 해결 방법
+- 결과 및 성과
 
-## 대안 배포
-- Netlify: 드래그&드롭 업로드 가능
-- Vercel: GitHub 연동 후 자동 배포 (정적 사이트도 가능)
+---
 
+## 주요 구성
+
+- `/index.html` : 소개 및 프로젝트 목록
+- `/projects/` : 프로젝트 상세 페이지
+- `/assets/` : 이력서, 경력기술서 및 이미지 자료
+- `/css`, `/js` : 스타일 및 인터랙션 스크립트
+
+---
+
+## 사용 기술
+
+- HTML5 / CSS3 (SCSS)
+- JavaScript / jQuery
+- Git / GitHub Pages
+
+---
+
+## 작업 및 배포 방식
+
+- 로컬에서 VSCode + Live Server로 작업
+- Git을 통해 변경사항 커밋/푸시
+- GitHub Pages로 자동 배포
+
+---
+
+## 업데이트 로그
+
+- 2026.01 — 초기 포트폴리오 구성
+
+---
+
+## 연락처
+
+- Email: bysaru@gmail.com
+- GitHub: https://github.com/IssuraX
