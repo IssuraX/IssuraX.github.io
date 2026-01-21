@@ -1,4 +1,4 @@
-/* White concept + swipe projects + Dark mode toggle (CSS variables)
+/* White base + swipe projects + Dark mode toggle
   - default: light
   - dark: html[data-theme="dark"]
 */
@@ -176,7 +176,7 @@ img{max-width:100%; display:block}
 
 .carousel{position:relative}
 .project-swiper { padding:2px 2px 50px; }
-.project-swiper .swiper-slide { width:380px; } /* 데스크탑 카드 폭 느낌 */
+.project-swiper .swiper-slide { width:380px; }
 .project-swiper .swiper-pagination-bullet { background:var(--text); opacity: 1; }
 .project-swiper .swiper-pagination-bullet-active { background:var(--accent); opacity: 1; }
 .swiper-button-prev::after, .swiper-button-next::after { display: none; }
@@ -189,7 +189,6 @@ img{max-width:100%; display:block}
 html[data-theme="dark"] .swiper-button-prev, html[data-theme="dark"] .swiper-button-next { background-color: rgba(255,255,255,.08);}
 html[data-theme="dark"] .swiper-button-prev:hover, html[data-theme="dark"] .swiper-button-next:hover { background-color: rgba(255,255,255,.16);}
 .swiper-button-prev:focus-visible, .swiper-button-next:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;}
-
 
 /* Project card with visual */
 .pcard{border:1px solid var(--line); background: var(--panel); border-radius: 22px; overflow:hidden; box-shadow: var(--shadow2); transform: translateZ(0);}
