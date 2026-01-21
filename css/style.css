@@ -105,7 +105,7 @@ img{max-width:100%; display:block}
 .eyebrow::before{content:""; width:10px; height:10px; border-radius:999px; background: var(--accent); opacity:.9;}
 .hero-title{font-size:2.5rem; line-height:1.15; margin:0 0 14px}
 .accent{display:block; color:var(--accent)}
-.hero-desc{margin:0 0 16px; color:var(--muted); font-size:16px;}
+.hero-desc{margin:0 0 16px; color:var(--muted); font-size:16px; word-break:keep-all;}
 .chips{list-style:none; padding:0; margin:0 0 18px; display:flex; flex-wrap:wrap; gap:10px}
 .chips li{font-size:13px; border:1px solid var(--line); background: var(--panel); padding:8px 10px; border-radius:999px;}
 .hero-cta{display:flex; gap:10px; flex-wrap:wrap}
@@ -174,12 +174,22 @@ img{max-width:100%; display:block}
 
 .site-footer{border-top:1px solid var(--line); padding:18px 0; color:var(--muted); font-size:13px}
 
-/* Carousel */
 .carousel{position:relative}
-.project-swiper { padding: 2px 2px 50px; }
+.project-swiper { padding:2px 2px 50px; }
 .project-swiper .swiper-slide { width:380px; } /* 데스크탑 카드 폭 느낌 */
 .project-swiper .swiper-pagination-bullet { background:var(--text); opacity: 1; }
 .project-swiper .swiper-pagination-bullet-active { background:var(--accent); opacity: 1; }
+.swiper-button-prev::after, .swiper-button-next::after { display: none; }
+.swiper-button-prev,
+.swiper-button-next { width:44px; height:44px; border-radius:50%; background-color:var(--btn-bg, rgba(0,0,0,.04)); background-repeat:no-repeat; background-position:center; background-size:20px 20px; transition:background-color .2s ease, transform .2s ease;}
+.swiper-button-prev { background-image:url("../assets/icon-arrow-prev.png");}
+.swiper-button-next { background-image:url("../assets/icon-arrow-next.png");}
+.swiper-button-prev:hover, .swiper-button-next:hover { background-color: rgba(0,0,0,.08); transform: scale(1.05);}
+.swiper-button-prev:active, .swiper-button-next:active { transform: scale(0.96); }
+html[data-theme="dark"] .swiper-button-prev, html[data-theme="dark"] .swiper-button-next { background-color: rgba(255,255,255,.08);}
+html[data-theme="dark"] .swiper-button-prev:hover, html[data-theme="dark"] .swiper-button-next:hover { background-color: rgba(255,255,255,.16);}
+.swiper-button-prev:focus-visible, .swiper-button-next:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;}
+
 
 /* Project card with visual */
 .pcard{border:1px solid var(--line); background: var(--panel); border-radius: 22px; overflow:hidden; box-shadow: var(--shadow2); transform: translateZ(0);}
@@ -227,4 +237,13 @@ blockquote{margin:0; padding:14px 16px; border-left:3px solid color-mix(in srgb,
 @media (min-width: 921px){
   .carousel__item{flex-basis: 380px}
   #mobileNav{ display:none !important;}
+}
+
+@media (max-width: 768px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 36px;
+    height: 36px;
+    background-size: 16px 16px;
+  }
 }
