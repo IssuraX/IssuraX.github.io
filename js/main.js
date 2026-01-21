@@ -115,9 +115,6 @@
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-
-        keyboard: { enabled: true },
-        a11y: { enabled: true },
       });
     }
   });
