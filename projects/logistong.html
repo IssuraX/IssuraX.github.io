@@ -1,108 +1,180 @@
-<!doctype html>
-<html lang="ko" data-theme="light">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Logistong 리뉴얼 퍼블리싱 | Portfolio</title>
-  <meta name="description" content="협업 환경에서 반응형 퍼블리싱: 이슈 관리와 일정 대응" />
-  <link rel="stylesheet" href="../css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+  <title>Logistong 리뉴얼 퍼블리싱 | 신동혁 Portfolio</title>
+  <meta name="description" content="협업 환경에서 반응형 퍼블리싱: 이슈 관리와 일정 대응"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/projects.css">
 </head>
 <body>
-  <a class="skip" href="#main">본문 바로가기</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <span class="brand__name">신동혁</span>
-        <span class="brand__role">Web Publisher</span>
-      </div>
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">SDH.DEV</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#projects">Projects</a></li>
+    <li><a href="../index.html#skills">Skills</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <ul>
+    <li><a href="../index.html#projects">Projects</a></li>
+    <li><a href="../index.html#skills">Skills</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
 
-      <nav class="nav" aria-label="주요 메뉴">
-        <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#skills">Skills</a>
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#contact">Contact</a>
-      </nav>
+<div class="page">
 
-      <div class="header-actions">
-        <button class="icon-btn" id="themeToggle" type="button" aria-label="다크 모드 켜기" title="테마 전환"><span aria-hidden="true">◐</span></button>
-        <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav">☰</button>
-      </div>
-    </div>
-
-    <div id="mobileNav" class="mobile-nav">
-      <div class="container mobile-nav__inner">
-        <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#skills">Skills</a>
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#contact">Contact</a>
-      </div>
-    </div>
-  </header>
-
-  <main id="main" class="section">
-    <div class="container">
-      <p class="breadcrumb"><a class="link" href="../index.html#projects">← Projects</a></p>
-
-      <section class="project-hero">
-        <h1>Logistong 리뉴얼 퍼블리싱</h1>
-        <p class="muted">협업 · 반응형 구축 · 일정 대응</p>
-
-        <div class="tagrow" aria-label="태그">
-          <span class="tag">협업</span>
-          <span class="tag">반응형</span>
-          <span class="tag">이슈 관리</span>
-          <span class="tag">납기 준수</span>
-        </div>
-
-        <div class="project-grid">
-          <div class="panel">
-            <h3>요약</h3>
-            <p class="muted">디자이너와 협업해 반응형 UI를 구현하고, 변경 요청/이슈를 관리하며 일정에 맞춰 산출물을 납품했습니다.</p>
-
-            <h3 style="margin-top:14px;">문제 · 과제</h3>
-            <ul class="bullets">
-              <li>디자인 변경 및 요청사항이 빈번해 커뮤니케이션 비용이 큼</li>
-              <li>반응형에서 컴포넌트별 깨짐 이슈가 발생</li>
-            </ul>
-
-            <h3 style="margin-top:14px;">해결</h3>
-            <ul class="bullets">
-              <li>이슈를 단위별로 쪼개 Jira로 트래킹(요청사항/버그/개선 분리)</li>
-              <li>레이아웃은 공통 패턴으로 정리해 변경 영향 범위를 최소화</li>
-            </ul>
-
-            <h3 style="margin-top:14px;">결과</h3>
-            <ul class="bullets">
-              <li>납기 내 오픈(일정 준수)</li>
-              <li>변경 요청 대응 속도 개선 및 재작업 감소</li>
-            </ul>
+  <!-- HERO -->
+  <div class="proj-hero">
+    <div style="max-width:1400px;margin:0 auto">
+      <p class="breadcrumb"><a href="../index.html#projects">← Projects</a></p>
+      <div class="proj-hero-inner">
+        <div>
+          <p class="proj-category">03 · 협업 구축</p>
+          <h1 class="proj-title fade-up">Logistong<br/>리뉴얼<br/>퍼블리싱</h1>
+          <p class="proj-subtitle fade-up">협업 · 반응형 구축 · 일정 대응</p>
+          <div class="proj-tags fade-up">
+            <span class="ptag">협업</span>
+            <span class="ptag">반응형</span>
+            <span class="ptag">이슈 관리</span>
+            <span class="ptag">납기 준수</span>
           </div>
-
-          <aside class="panel">
-            <h3>프로젝트 정보</h3>
-            <ul class="kv2">
-              <li><strong>기간</strong> 2023.04–2023.06</li>
-              <li><strong>소속</strong> 위킵(주)</li>
-              <li><strong>역할</strong> 퍼블리싱</li>
-              <li><strong>기여도</strong> 100%</li>
-              <li><strong>스택</strong> HTML/CSS, JavaScript/jQuery, Git, Jira, Slack</li>
-            </ul>
-
-            <div class="mock" style="margin-top:14px;">
-              <strong><img src="/assets/pj005.png" alt=""></strong><br />
-              <strong><img src="/assets/pj006.png" alt=""></strong><br />
-            </div>
-          </aside>
+          <div class="proj-meta-row fade-up">
+            <span><strong>기간</strong> 2023.04 — 2023.06</span>
+            <span><strong>소속</strong> 위킵(주)</span>
+            <span><strong>역할</strong> 퍼블리싱</span>
+            <span><strong>기여도</strong> 100%</span>
+          </div>
         </div>
-      </section>
-
-      <p class="small-note">© <span id="year"></span> 신동혁</p>
+        <div class="proj-index">03</div>
+      </div>
     </div>
-  </main>
+  </div>
 
-  <!-- js -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="../js/main.js"></script>
+  <!-- BODY -->
+  <div class="proj-body" style="max-width:1400px;margin:0 auto">
+
+    <main>
+
+      <!-- 요약 -->
+      <div class="cs-section fade-up">
+        <p class="cs-label" data-n="01">Overview</p>
+        <h2 class="cs-title">프로젝트 요약</h2>
+        <div class="cs-text">
+          <p>디자이너와 협업해 반응형 UI를 구현하고, 변경 요청과 이슈를 관리하며 일정에 맞춰 산출물을 납품했습니다.</p>
+          <p>에이전시 환경에서 퍼블리셔 1인 체제로 전체 퍼블리싱을 담당했으며, 이슈 구조화를 통해 변경 영향을 최소화하면서 납기를 지켰습니다.</p>
+        </div>
+      </div>
+      <div class="cs-divider"></div>
+
+      <!-- 문제 -->
+      <div class="cs-section fade-up">
+        <p class="cs-label" data-n="02">Problem</p>
+        <h2 class="cs-title">문제 · 과제</h2>
+        <ul class="cs-list">
+          <li>디자인 변경 및 요청사항이 빈번하게 발생해 커뮤니케이션 비용이 큰 환경</li>
+          <li>반응형에서 컴포넌트별 깨짐 이슈가 산발적으로 발생</li>
+        </ul>
+      </div>
+      <div class="cs-divider"></div>
+
+      <!-- 해결 -->
+      <div class="cs-section fade-up">
+        <p class="cs-label" data-n="03">Solution</p>
+        <h2 class="cs-title">해결 방법</h2>
+        <ul class="cs-list">
+          <li>이슈를 단위별로 세분화하여 Jira로 트래킹 (요청사항 / 버그 / 개선 구분 관리)</li>
+          <li>레이아웃을 공통 패턴으로 먼저 정리해 변경 요청 시 영향 범위를 최소화</li>
+          <li>반응형 이슈는 브레이크포인트별 점검 체계를 세워 누락 없이 대응</li>
+        </ul>
+      </div>
+      <div class="cs-divider"></div>
+
+      <!-- 결과 -->
+      <div class="cs-section fade-up">
+        <p class="cs-label" data-n="04">Result</p>
+        <h2 class="cs-title">결과</h2>
+        <ul class="cs-list">
+          <li>납기 내 오픈 — 일정 지연 없이 산출물 납품 완료</li>
+          <li>변경 요청 대응 속도 개선 및 재작업 감소</li>
+          <li>이슈 단위 분리로 커뮤니케이션 명확화, 팀 전체 작업 효율 향상</li>
+        </ul>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <div class="cs-metric-num">0</div>
+            <div class="cs-metric-label">Schedule Delay</div>
+            <div class="cs-metric-desc">일정 지연 없이 납품 완료</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">1인</div>
+            <div class="cs-metric-label">Solo Publisher</div>
+            <div class="cs-metric-desc">전체 퍼블리싱 단독 담당</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">100%</div>
+            <div class="cs-metric-label">Responsive</div>
+            <div class="cs-metric-desc">전 페이지 반응형 구현</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="proj-sidebar">
+      <div class="sidebar-card fade-up">
+        <p class="sidebar-card-title">프로젝트 정보</p>
+        <div class="kv-row"><span class="kv-key">기간</span><span class="kv-val">2023.04 – 2023.06</span></div>
+        <div class="kv-row"><span class="kv-key">소속</span><span class="kv-val">위킵(주)</span></div>
+        <div class="kv-row"><span class="kv-key">역할</span><span class="kv-val">퍼블리싱</span></div>
+        <div class="kv-row"><span class="kv-key">기여도</span><span class="kv-val">100%</span></div>
+        <div class="kv-row"><span class="kv-key">스택</span><span class="kv-val">HTML/CSS<br/>JavaScript/jQuery<br/>Git, Jira, Slack</span></div>
+        <div class="kv-row"><span class="kv-key">환경</span><span class="kv-val">협업 (에이전시)</span></div>
+      </div>
+
+      <div class="proj-img-wrap fade-up">
+        <img src="../assets/pj005.png" alt="Logistong 리뉴얼 화면 1" loading="lazy"
+          onerror="this.parentElement.style.display='none'"/>
+        <p class="proj-img-label">리뉴얼 화면 01</p>
+      </div>
+      <div class="proj-img-wrap fade-up">
+        <img src="../assets/pj006.png" alt="Logistong 리뉴얼 화면 2" loading="lazy"
+          onerror="this.parentElement.style.display='none'"/>
+        <p class="proj-img-label">리뉴얼 화면 02</p>
+      </div>
+    </aside>
+
+  </div><!-- /.proj-body -->
+
+  <!-- PROJECT NAV -->
+  <nav class="proj-nav" aria-label="다른 프로젝트">
+    <a href="./deflux.html" class="proj-nav-item">
+      <span class="proj-nav-dir">← Prev Project</span>
+      <span class="proj-nav-title">대림 계열사 홈페이지 운영 및 UI 개선</span>
+    </a>
+    <a href="./wekeep.html" class="proj-nav-item next">
+      <span class="proj-nav-dir">Next Project →</span>
+      <span class="proj-nav-title">Wekeep 홈페이지 리뉴얼</span>
+    </a>
+  </nav>
+
+</div><!-- /.page -->
+
+<footer>
+  <span>© 2025 신동혁 · Web Publisher Portfolio</span>
+  <span><a href="../index.html" style="color:var(--dim);text-decoration:none">← Back to Home</a></span>
+</footer>
+<script src="../js/projects.js"></script>
 </body>
 </html>

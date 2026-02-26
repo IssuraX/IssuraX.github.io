@@ -1,282 +1,275 @@
-<!doctype html>
-<html lang="ko" data-theme="light">
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
   <title>신동혁 | Web Publisher Portfolio</title>
-  <meta name="description" content="웹 퍼블리싱 경력 4년 5개월. 반응형 웹 구축·리뉴얼·운영/유지보수, SCSS 구조화, 협업 기반 UI 구현." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/style.css" />
+  <meta name="description" content="4년 5개월 경력의 웹 퍼블리셔 신동혁 포트폴리오. 반응형 웹 구축·리뉴얼·운영/유지보수 전문."/>
+  <meta property="og:title" content="신동혁 | Web Publisher Portfolio"/>
+  <meta property="og:description" content="운영까지 책임지는 웹 퍼블리셔 | 4년 5개월 실무 경험"/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="skip" href="#main">본문 바로가기</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <span class="brand__name">신동혁</span>
-        <span class="brand__role">Web Publisher</span>
+<!-- ══ NAV ══ -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">SDH.DEV</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<nav class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- 사이드 도트 -->
+<div id="side-nav">
+  <div class="side-dot active" data-target="hero"     data-label="Home"></div>
+  <div class="side-dot"        data-target="projects" data-label="Projects"></div>
+  <div class="side-dot"        data-target="skills"   data-label="Skills"></div>
+  <div class="side-dot"        data-target="about"    data-label="About"></div>
+  <div class="side-dot"        data-target="contact"  data-label="Contact"></div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div id="hero-glow"></div>
+
+  <div class="hero-left">
+    <p class="hero-label" id="heroLabel">Web Publisher · 4y 5m exp</p>
+    <h1 class="hero-name">
+      <span class="hero-name-wrap" id="heroNameWrap" data-text="신동혁">
+        <span id="heroNameChars"></span>
+      </span>
+    </h1>
+    <p class="hero-role" id="heroRole">
+      <span id="heroRoleText"></span>
+      <span class="hero-role-cursor" id="heroRoleCursor"></span>
+    </p>
+    <p class="hero-desc" id="heroDesc">
+      에이전시/자체 서비스 환경에서 반응형 웹 구축·리뉴얼·운영 유지보수를 수행해왔습니다.
+      SCSS 구조화와 공통 UI 정리로 유지보수 효율을 높이고, 협업 기반으로 이슈를 빠르게 해결합니다.
+    </p>
+    <div class="hero-tags" id="heroTags">
+      <span class="tag">반응형·크로스브라우징</span>
+      <span class="tag">SCSS 구조화</span>
+      <span class="tag">운영 이슈 대응</span>
+      <span class="tag">컴포넌트/템플릿화</span>
+    </div>
+    <div class="hero-cta" id="heroCta">
+      <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+      <a href="./resume_hyeok.pdf" class="btn btn-outline" target="_blank">이력서 PDF</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-card" id="sc1">
+      <div class="stat-num" data-count="4.5" data-suffix="년">4.5년</div>
+      <div class="stat-label">TOTAL EXPERIENCE</div>
+      <div class="stat-sub">에이전시 + 자체서비스</div>
+    </div>
+    <div class="stat-card" id="sc2">
+      <div class="stat-num" data-count="3" data-suffix="+">3+</div>
+      <div class="stat-label">MAJOR PROJECTS</div>
+      <div class="stat-sub">운영·리뉴얼·구축 포함</div>
+    </div>
+    <div class="stat-card" id="sc3">
+      <div class="stat-num" data-count="100" data-suffix="%">100%</div>
+      <div class="stat-label">RESPONSIVE WEB</div>
+      <div class="stat-sub">전 프로젝트 반응형 구현</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects" class="sec">
+  <div class="sec-header fade-up">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title">Projects</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="projects-grid">
+    <!-- featured -->
+    <a href="./projects/deflux.html" class="project-card featured fade-up">
+      <div>
+        <p class="project-period">2024.01 — 2025.09 · 운영/유지보수</p>
+        <h3 class="project-title">대림 계열사 홈페이지<br/>운영 및 UI 개선</h3>
+        <p class="project-subtitle">운영 안정 · 이슈 대응 · 유지보수 효율화</p>
+        <p class="project-desc">대림 계열사 복수 도메인의 운영 퍼블리싱을 전담. 이슈 유형별 분류 체계를 수립하고 공통 스타일 시트 정리로 중복 CSS를 축소하여 이슈 재발률을 낮춤.</p>
+        <div class="project-results">
+          <div class="result-item"><div class="result-num">50+</div><div class="result-desc">월 이슈 처리</div></div>
+          <div class="result-item"><div class="result-num">4개</div><div class="result-desc">운영 도메인</div></div>
+          <div class="result-item"><div class="result-num">100%</div><div class="result-desc">퍼블리싱 전담</div></div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-badge">HTML5</span><span class="stack-badge">SCSS</span>
+          <span class="stack-badge">jQuery</span><span class="stack-badge">Git</span><span class="stack-badge">Jira</span>
+        </div>
+        <div class="project-links">
+          <span class="project-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            상세 보기
+          </span>
+        </div>
       </div>
+      <div class="featured-code-block">
+        <p style="font-family:var(--mono);font-size:.6rem;color:var(--dim);margin-bottom:.8rem;letter-spacing:.07em">// 공통 컴포넌트 구조 예시</p>
+        <pre>
+          <span style="color:#555">// _components.scss</span>
+          <span style="color:var(--accent2)">.card</span> {
+            &amp;__header { ... }
+            &amp;__body   { ... }
+            &amp;__footer { ... }
+            <span style="color:#555">// 반응형</span>
+            <span style="color:var(--accent)">@include</span> respond-to(md) {
+              flex-direction: column;
+            }
+          }
+        </pre>
+      </div>
+    </a>
 
-      <nav class="nav" aria-label="주요 메뉴">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <!-- wekeep -->
+    <a href="./projects/wekeep.html" class="project-card fade-up" style="transition-delay:.1s">
+      <p class="project-period">2022.12 — 2023.01 · 리뉴얼</p>
+      <h3 class="project-title">Wekeep 홈페이지 리뉴얼</h3>
+      <p class="project-subtitle">구조 설계 · 템플릿화 · 반응형</p>
+      <p class="project-desc">자사 홈페이지 리뉴얼 과정에서 SCSS 구조화와 공통 템플릿을 도입해 신규 페이지 확장 가능 구조로 개선. 퍼블리싱 100% 단독 진행.</p>
+      <div class="project-results">
+        <div class="result-item"><div class="result-num">30%</div><div class="result-desc">제작 시간 단축</div></div>
+        <div class="result-item"><div class="result-num">100%</div><div class="result-desc">단독 퍼블리싱</div></div>
+      </div>
+      <div class="project-stack">
+        <span class="stack-badge">HTML5</span><span class="stack-badge">SCSS</span>
+        <span class="stack-badge">JavaScript</span><span class="stack-badge">반응형</span>
+      </div>
+      <div class="project-links">
+        <span class="project-link">상세 보기 →</span>
+      </div>
+    </a>
 
-      <div class="header-actions">
-        <button class="icon-btn" id="themeToggle" type="button" aria-label="다크 모드 켜기" title="테마 전환">
-          <span aria-hidden="true">◐</span>
-        </button>
-        <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileNav">
-          ☰
-        </button>
+    <!-- logistong -->
+    <a href="./projects/logistong.html" class="project-card fade-up" style="transition-delay:.2s">
+      <p class="project-period">2023.04 — 2023.06 · 협업 구축</p>
+      <h3 class="project-title">Logistong 리뉴얼 퍼블리싱</h3>
+      <p class="project-subtitle">협업 · 반응형 구축 · 일정 대응</p>
+      <p class="project-desc">Jira/Git 기반 협업 환경에서 이슈를 단위별로 분리·트래킹. 레이아웃을 공통 패턴으로 정리해 변경 영향 범위를 최소화하고 납기 내 납품 완료.</p>
+      <div class="project-results">
+        <div class="result-item"><div class="result-num">0</div><div class="result-desc">일정 지연</div></div>
+        <div class="result-item"><div class="result-num">1인</div><div class="result-desc">퍼블리셔 체제</div></div>
+      </div>
+      <div class="project-stack">
+        <span class="stack-badge">HTML5</span><span class="stack-badge">CSS3</span>
+        <span class="stack-badge">Git</span><span class="stack-badge">Jira</span><span class="stack-badge">반응형</span>
+      </div>
+      <div class="project-links">
+        <span class="project-link">상세 보기 →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills" class="sec">
+  <div class="sec-header fade-up">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title">Skills</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p class="skills-intro fade-up">"할 줄 안다"가 아닌, 실무에서 어떻게 사용했는지를 기준으로 정리했습니다.</p>
+  <div class="skills-grid fade-up" id="skillsGrid">
+    <div class="skill-group">
+      <div class="skill-group-label">Markup &amp; Style</div>
+      <div class="skill-item"><span class="skill-name">HTML5 / 시맨틱</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="95"></div></div></div>
+      <div class="skill-item"><span class="skill-name">CSS3 / Flex / Grid</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></div>
+      <div class="skill-item"><span class="skill-name">SCSS / 구조화</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></div>
+      <div class="skill-item"><span class="skill-name">반응형 / 크로스브라우징</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="92"></div></div></div>
+      <div class="skill-item"><span class="skill-name">웹 접근성(WCAG)</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="75"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Script &amp; Framework</div>
+      <div class="skill-item"><span class="skill-name">JavaScript (ES6+)</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="78"></div></div></div>
+      <div class="skill-item"><span class="skill-name">jQuery</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Bootstrap</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="80"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Swiper / 플러그인</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="82"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Collaboration &amp; Tools</div>
+      <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="80"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Jira / Slack</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="85"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Figma / Zeplin / XD</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></div>
+      <div class="skill-item"><span class="skill-name">운영 이슈 대응/분류</span><div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about" class="sec">
+  <div class="sec-header fade-up">
+    <span class="sec-num">03</span>
+    <h2 class="sec-title">About</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div>
+      <div class="about-text fade-up">
+        <p>약 <strong>4년 5개월</strong>의 실무를 통해 에이전시와 자체 서비스 양쪽 환경을 경험했습니다. 에이전시에서는 빠른 납기 대응으로 판단력과 효율적인 작업 습관을 키웠고, 자체 서비스에서는 장기 운영 관점에서 코드의 유지보수성을 고민하며 성장했습니다.</p>
+        <p>디자인 구현에 그치지 않고, <strong>반복 작업을 줄이는 구조</strong>와 <strong>개발자 협업을 고려한 마크업</strong>을 중요하게 생각합니다.</p>
+      </div>
+      <div class="about-highlight fade-up">
+        <p>구조가 좋은 코드는 다음 사람도 쉽게 이해하고 수정할 수 있습니다. 그 '다음 사람'이 반년 뒤의 나 자신일 수도 있기 때문에, 항상 주석과 구조에 신경씁니다.</p>
       </div>
     </div>
-
-    <div id="mobileNav" class="mobile-nav">
-      <div class="container mobile-nav__inner">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+    <div class="about-right fade-up">
+      <div class="info-table">
+        <div class="info-row"><span class="info-key">경력</span><span class="info-val">4년 5개월 (2020.10 ~ 현재)</span></div>
+        <div class="info-row"><span class="info-key">주요 기술</span><span class="info-val">HTML5 · CSS3(SCSS) · JS/jQuery · Git</span></div>
+        <div class="info-row"><span class="info-key">관심 영역</span><span class="info-val">유지보수성 · UI 품질 · 웹 접근성</span></div>
+        <div class="info-row"><span class="info-key">학력</span><span class="info-val">한양사이버대학교 뉴미디어디자인<br/><span style="font-size:.78rem;color:var(--dim)">재학 중 (졸업예정 2027)</span></span></div>
+        <div class="info-row"><span class="info-key">언어</span><span class="info-val">한국어 (원어민)</span></div>
+        <div class="info-row"><span class="info-key">근무 형태</span><span class="info-val">사무실 / 하이브리드 가능</span></div>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main id="main">
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">Web Publisher · 4y 5m</p>
-          <h1 class="hero-title">
-            운영까지 책임지는 <span class="accent">웹 퍼블리셔</span>
-          </h1>
-          <p class="hero-desc">
-            에이전시/자체 서비스 환경에서
-            <strong>반응형 웹 구축·리뉴얼·운영/유지보수</strong>를 수행해왔습니다.
-            SCSS 구조화와 공통 UI 정리로 유지보수 효율을 높이고,
-            협업 기반으로 이슈를 빠르게 해결합니다.
-          </p>
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="sec">
+  <h2 class="contact-title fade-up">같이 일해요,<br/><span>지금 연락하세요.</span></h2>
+  <p class="contact-sub fade-up">새로운 기회나 협업 제안 언제든지 환영합니다.</p>
+  <div class="contact-links fade-up">
+    <a href="mailto:bysaru@gmail.com" class="contact-link"><span class="contact-link-label">Email</span><span class="contact-link-val">bysaru@gmail.com</span></a>
+    <a href="https://github.com/IssuraX" class="contact-link" target="_blank"><span class="contact-link-label">GitHub</span><span class="contact-link-val">github.com/IssuraX</span></a>
+    <a href="./resume_hyeok.pdf" class="contact-link" target="_blank"><span class="contact-link-label">Resume</span><span class="contact-link-val">이력서 PDF</span></a>
+  </div>
+</section>
 
-          <ul class="chips" aria-label="핵심 역량">
-            <li>반응형·크로스브라우징</li>
-            <li>SCSS 구조화</li>
-            <li>운영 이슈 대응</li>
-            <li>컴포넌트/템플릿화</li>
-            <!-- <li>협업(Jira/Git)</li> -->
-          </ul>
-
-          <div class="hero-cta">
-            <a class="btn" href="#projects">프로젝트 보기</a>
-            <a class="btn btn--ghost" href="./assets/resume_hyeok.pdf" target="_blank" rel="noopener">이력서(PDF)</a>
-          </div>
-        </div>
-
-        <div class="hero-card" role="region" aria-label="요약 정보">
-          <dl class="kv">
-            <div>
-              <dt>경력</dt>
-              <dd>4년 5개월</dd>
-            </div>
-            <div>
-              <dt>주요 기술</dt>
-              <dd>HTML5 · CSS3(SCSS) · JavaScript/jQuery · Bootstrap · Git</dd>
-            </div>
-            <div>
-              <dt>관심 영역</dt>
-              <dd>유지보수성 · UI 품질 · 접근성</dd>
-            </div>
-            <div>
-              <dt>학력</dt>
-              <dd>한양사이버대학교 뉴미디어디자인 재학<br/>(졸업예정 2027)</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Projects</h2>
-          <p>대표 이미지 기반의 카드가 좌우로 스와이프(스크롤)됩니다.</p>
-        </div>
-
-        <div class="carousel" data-carousel>
-          <div class="swiper project-swiper" aria-label="프로젝트 슬라이더">
-            <div class="swiper-wrapper">
-
-              <div class="swiper-slide">
-                <!-- 기존 pcard 카드 그대로 넣기 -->
-                <article class="pcard">
-                  <a class="pcard__link" href="./projects/deflux.html" aria-label="대림 계열사 홈페이지 운영 및 UI 개선 상세 보기">
-                    <div class="pcard__media">
-                      <img src="./assets/works01.png" alt="대림 계열사 운영 프로젝트 대표 이미지">
-                    </div>
-                    <div class="pcard__body">
-                      <div class="pcard__top">
-                        <h3>대림 계열사 홈페이지 운영 및 UI 개선</h3>
-                        <p class="muted">운영 안정 · 이슈 대응 · 유지보수 효율</p>
-                      </div>
-                      <ul class="meta">
-                        <li><strong>기간</strong> 2024.01–2025.09</li>
-                        <li><strong>역할</strong> 퍼블리싱 전담</li>
-                        <li><strong>환경</strong> 운영/유지보수</li>
-                      </ul>
-                      <p class="summary">운영 이슈 대응, 공통 스타일 정리, 재발 방지 중심으로 품질을 안정화.</p>
-                      <span class="link">상세 보기 →</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="pcard">
-                  <a class="pcard__link" href="./projects/wekeep.html" aria-label="Wekeep 홈페이지 리뉴얼 상세 보기">
-                    <div class="pcard__media">
-                      <img src="./assets/works02.png" alt="Wekeep 리뉴얼 프로젝트 대표 이미지">
-                    </div>
-                    <div class="pcard__body">
-                      <div class="pcard__top">
-                        <h3>Wekeep 홈페이지 리뉴얼</h3>
-                        <p class="muted">구조 설계 · 템플릿화 · 반응형</p>
-                      </div>
-                      <ul class="meta">
-                        <li><strong>기간</strong> 2022.12–2023.01</li>
-                        <li><strong>역할</strong> 퍼블리싱 100%</li>
-                        <li><strong>환경</strong> 자체 서비스</li>
-                      </ul>
-                      <p class="summary">SCSS 구조화 + 공통 템플릿 도입으로 확장 가능한 UI로 리뉴얼.</p>
-                      <span class="link">상세 보기 →</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-
-              <div class="swiper-slide">
-                <article class="pcard">
-                  <a class="pcard__link" href="./projects/logistong.html" aria-label="Logistong 리뉴얼 퍼블리싱 상세 보기">
-                    <div class="pcard__media">
-                      <img class="logo" src="./assets/works03.svg" alt="Logistong 협업 리뉴얼 대표 이미지">
-                    </div>
-                    <div class="pcard__body">
-                      <div class="pcard__top">
-                        <h3>Logistong 리뉴얼 퍼블리싱</h3>
-                        <p class="muted">협업 · 반응형 구축 · 일정 대응</p>
-                      </div>
-                      <ul class="meta">
-                        <li><strong>기간</strong> 2023.04–2023.06</li>
-                        <li><strong>역할</strong> 퍼블리셔 1인</li>
-                        <li><strong>환경</strong> 협업(Jira/Git)</li>
-                      </ul>
-                      <p class="summary">이슈를 구조화해 재작업을 줄이고, 일정 내 납품을 목표로 진행.</p>
-                      <span class="link">상세 보기 →</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-
-            </div>
-
-            <!-- 네비게이션/페이지네이션 -->
-            <div class="swiper-button-prev" aria-label="이전"></div>
-            <div class="swiper-button-next" aria-label="다음"></div>
-            <div class="swiper-pagination" aria-label="페이지네이션"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section section--alt">
-      <div class="container">
-        <div class="section-head">
-          <h2>Skills</h2>
-          <p>“할 줄 안다”가 아닌, “어떻게 써서 무엇을 만들었는지” 정리했습니다.</p>
-        </div>
-
-        <div class="two-col">
-          <div class="panel">
-            <h3>퍼블리싱</h3>
-            <ul class="bullets">
-              <li>시맨틱 마크업, 재사용 가능한 구조 설계</li>
-              <li>반응형 레이아웃(Flex/Grid) 및 크로스브라우징</li>
-              <li>SCSS 변수/믹스인/컴포넌트 단위 구조화</li>
-              <li>UI 품질 관리(QA 대응, 픽셀/간격 정합)</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>협업/운영</h3>
-            <ul class="bullets">
-              <li>Git 기반 협업(브랜치/PR/리뷰 흐름)</li>
-              <li>Jira/Slack 기반 이슈 트래킹 및 커뮤니케이션</li>
-              <li>운영 이슈 대응(버그/개선/긴급 분류)</li>
-              <li>디자인툴 연동(XD/Zeplin/Figma 등) 기반 핸드오프</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>About</h2>
-          <p>🧩 구조화 | 📱 반응형 | 🤝 협업 | 🛠 운영</p>
-        </div>
-
-        <div class="panel">
-          <p>
-            약 4년 이상의 실무 경험을 통해 서비스 운영 환경에서의 웹 퍼블리싱을 경험해왔습니다.<br/>
-            디자인 구현에 그치지 않고, 반복 작업을 줄이는 구조와<br/>
-            개발자 협업을 고려한 마크업을 중요하게 생각합니다.<br/>
-            <br/>
-            SCSS 구조화, 공통 컴포넌트 분리, 반응형 대응을 하며,<br/>
-            기획·디자인·개발 사이에서 발생하는 문제를<br/>
-            퍼블리싱 관점에서 정리하고 해결하는 역할을 해왔습니다.<br/>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section section--alt">
-      <div class="container">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <p>Email & GitHub</p>
-        </div>
-
-        <div class="contact">
-          <a class="contact-item" href="mailto:bysaru@gmail.com">
-            <span class="label">Email</span>
-            <span class="value">bysaru@gmail.com</span>
-          </a>
-          <a class="contact-item" href="https://github.com/IssuraX" target="_blank" rel="noopener">
-            <span class="label">GitHub</span>
-            <span class="value">github.com/IssuraX</span>
-          </a>
-        </div>
-
-        <!-- <p class="small-note">
-          * 회사 제출용이라면 연락처는 공개 범위를 조절하고, PDF 이력서/경력기술서는 assets 폴더에 넣어 링크로 연결하세요.
-        </p> -->
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> 신동혁. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- js -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="./js/main.js"></script>
+<footer>
+  <span>© 2025 신동혁 · Web Publisher Portfolio</span>
+  <span>Built with HTML · CSS · Vanilla JS</span>
+</footer>
+<script src="/js/main.js"></script>
 </body>
 </html>
