@@ -76,7 +76,7 @@ document.documentElement.classList.replace('no-js','js-ready');
   const desc=document.getElementById('heroDesc'),tags=document.getElementById('heroTags'),cta=document.getElementById('heroCta');
   const sc1=document.getElementById('sc1'),sc2=document.getElementById('sc2'),sc3=document.getElementById('sc3');
   const NAME='신동혁',ROLE='Web Publisher';
-  const GL='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?';
+  const GL='SHINDONGHYEOKWEBPUBLISHER'.split('');
 
   setTimeout(()=>label.classList.add('in'),200);
 
@@ -206,16 +206,38 @@ document.documentElement.classList.replace('no-js','js-ready');
   });
 })();
 
-/* ══ CONTACT VISITOR COUNTER (localStorage) ══ */
+/* ══ CONTACT VISITOR COUNTER ══ */
 (function(){
-  const counterEl=document.getElementById('visitorCount');
-  if(!counterEl)return;
+  const yesterdayEl=document.getElementById('visitorYesterday');
+  const todayEl=document.getElementById('visitorToday');
+  if(!yesterdayEl||!todayEl)return;
 
-  const KEY='portfolioVisitorCount';
-  let count=parseInt(localStorage.getItem(KEY),10);
-  if(Number.isNaN(count)||count<0)count=0;
-  count+=1;
-  localStorage.setItem(KEY,String(count));
+  const KEY='portfolioVisitorCounterDaily';
+  const now=new Date();
+  const todayKey=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
 
-  counterEl.textContent=count.toLocaleString('ko-KR')+'명';
+  let state={date:todayKey,today:0,yesterday:0};
+  try{
+    const saved=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(saved&&typeof saved==='object'){
+      const savedToday=Number(saved.today);
+      const savedYesterday=Number(saved.yesterday);
+      state={
+        date:typeof saved.date==='string'?saved.date:todayKey,
+        today:Number.isFinite(savedToday)&&savedToday>=0?Math.floor(savedToday):0,
+        yesterday:Number.isFinite(savedYesterday)&&savedYesterday>=0?Math.floor(savedYesterday):0
+      };
+    }
+  }catch(_){/* ignore invalid storage */}
+
+  if(state.date!==todayKey){
+    state={date:todayKey,today:1,yesterday:state.today};
+  }else{
+    state.today+=1;
+  }
+
+  localStorage.setItem(KEY,JSON.stringify(state));
+
+  yesterdayEl.textContent=state.yesterday.toLocaleString('ko-KR')+'명';
+  todayEl.textContent=state.today.toLocaleString('ko-KR')+'명';
 })();

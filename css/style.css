@@ -398,7 +398,8 @@ nav{
 .contact-link-label{font-family:var(--mono);font-size:clamp(.58rem,1.2vw,.67rem);color:var(--dim);letter-spacing:.12em;text-transform:uppercase}
 .contact-link-val{font-size:clamp(.75rem,1.7vw,.92rem);color:var(--muted);word-break:break-all;text-align:center}
 .contact-link:hover .contact-link-val{color:var(--accent)}
-.visitor-counter{margin-top:clamp(1.2rem,2.6vw,2rem);font-family:var(--mono);font-size:clamp(.66rem,1.4vw,.8rem);color:var(--dim);letter-spacing:.08em}
+.visitor-counter{margin-top:clamp(1.2rem,2.6vw,2rem);display:inline-flex;flex-direction:column;gap:.45rem;align-items:center;font-family:var(--mono);font-size:clamp(.66rem,1.4vw,.8rem);color:var(--dim);letter-spacing:.08em}
+.visitor-counter-row{margin:0}
 .visitor-counter strong{color:var(--accent);font-weight:600;margin-left:.35rem}
 
 /* FOOTER */
