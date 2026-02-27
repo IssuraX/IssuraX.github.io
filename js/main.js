@@ -205,3 +205,17 @@ document.documentElement.classList.replace('no-js','js-ready');
     }
   });
 })();
+
+/* ══ CONTACT VISITOR COUNTER (localStorage) ══ */
+(function(){
+  const counterEl=document.getElementById('visitorCount');
+  if(!counterEl)return;
+
+  const KEY='portfolioVisitorCount';
+  let count=parseInt(localStorage.getItem(KEY),10);
+  if(Number.isNaN(count)||count<0)count=0;
+  count+=1;
+  localStorage.setItem(KEY,String(count));
+
+  counterEl.textContent=count.toLocaleString('ko-KR')+'명';
+})();
