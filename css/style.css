@@ -35,8 +35,8 @@ body::before{
 /* ══════════════════════════════
    NAV
 ══════════════════════════════ */
-nav{
-  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:300;
+#mainNav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:500;
   display:flex;justify-content:space-between;align-items:center;
   padding:0 var(--px);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -79,9 +79,9 @@ nav{
 .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);width:24px}
 
 .nav-drawer{
-  display:none;position:fixed;top:var(--nav-h);left:0;right:0;
-  background:rgba(10,10,10,.97);border-bottom:1px solid var(--border);
-  z-index:299;padding:1.5rem var(--px);
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;overflow-y:auto;
+  background:rgba(10,10,10,.98);border-bottom:1px solid var(--border);
+  z-index:490;padding:1.5rem var(--px) 2.5rem;
   transform:translateY(-10px);opacity:0;
   transition:transform .3s ease,opacity .3s ease;pointer-events:none;
 }
