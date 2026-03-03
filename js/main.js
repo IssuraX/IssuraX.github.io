@@ -149,9 +149,36 @@ document.documentElement.classList.replace('no-js','js-ready');
   if(sg)sObs.observe(sg);
 })();
 
+/* ══ WORKS SWIPER ══ */
+(function(){
+  const worksEl=document.getElementById('worksSwiper');
+  if(!worksEl||typeof Swiper==='undefined')return;
+
+  new Swiper(worksEl,{
+    slidesPerView:1,
+    spaceBetween:14,
+    speed:550,
+    grabCursor:true,
+    pagination:{
+      el:'.works-pagination',
+      clickable:true
+    },
+    navigation:{
+      nextEl:'.works-next',
+      prevEl:'.works-prev'
+    },
+    breakpoints:{
+      768:{slidesPerView:1.2,spaceBetween:16},
+      1024:{slidesPerView:2,spaceBetween:18},
+      1400:{slidesPerView:2.35,spaceBetween:20}
+    }
+  });
+})();
+
+
 /* ══ ACTIVE NAV via IntersectionObserver ══ */
 (function(){
-  const sections=['hero','projects','skills','about','contact'];
+  const sections=['hero','projects','works','skills','about','contact'];
   const navLinks=document.querySelectorAll('.nav-links a');
   const sideDots=document.querySelectorAll('.side-dot');
 

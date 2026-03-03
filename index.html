@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css?v=20260302">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
 
@@ -19,6 +20,7 @@
   <a href="#hero" class="nav-logo">SDH.DEV</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#works">Works</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -32,6 +34,7 @@
   <ul>
     <li><a href="#hero">Home</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#works">Works</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -42,6 +45,7 @@
 <div id="side-nav">
   <div class="side-dot active" data-target="hero"     data-label="Home"></div>
   <div class="side-dot"        data-target="projects" data-label="Projects"></div>
+  <div class="side-dot"        data-target="works"    data-label="Works"></div>
   <div class="side-dot"        data-target="skills"   data-label="Skills"></div>
   <div class="side-dot"        data-target="about"    data-label="About"></div>
   <div class="side-dot"        data-target="contact"  data-label="Contact"></div>
@@ -191,10 +195,131 @@
   </div>
 </section>
 
+<!-- ══ WORKS ══ -->
+<section id="works" class="sec">
+  <div class="sec-header fade-up">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title">Client Works (Agency & Freelancer)</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="works-swiper swiper fade-up" id="worksSwiper">
+    <div class="swiper-wrapper">
+      <article class="swiper-slide works-card">
+        <div class="works-card-top">
+          <p class="works-project">디디에두보 리뉴얼</p>
+          <p class="works-brand">브랜드: DIDIER DUBOT</p>
+        </div>
+        <ul class="works-meta">
+          <li><span>기간</span><strong>2021.01 ~ 2021.03</strong></li>
+          <li><span>유형</span><strong>리뉴얼</strong></li>
+          <li><span>솔루션</span><strong>CAFE24</strong></li>
+          <li><span>범위</span><strong>PC · 모바일 퍼블리싱</strong></li>
+          <li><span>역할</span><strong>퍼블리싱 100% · 디자이너/개발 협업</strong></li>
+        </ul>
+        <p class="works-point">성과/특징: CAFE24 솔루션 기반으로 PC/모바일 리뉴얼 퍼블리싱 진행. 브랜드 가이드에 맞춘 UI 구현과 함께 주요 화면의 구조 정리 및 스타일 일관성 유지 중점에 작업</p>
+      </article>
+
+      <article class="swiper-slide works-card">
+        <div class="works-card-top">
+          <p class="works-project">디자인스킨 리뉴얼</p>
+          <p class="works-brand">브랜드: DESIGN SKIN</p>
+        </div>
+        <ul class="works-meta">
+          <li><span>기간</span><strong>2021.06 ~ 2021.09</strong></li>
+          <li><span>유형</span><strong>리뉴얼</strong></li>
+          <li><span>솔루션</span><strong>CAFE24</strong></li>
+          <li><span>범위</span><strong>PC · 모바일 퍼블리싱</strong></li>
+          <li><span>역할</span><strong>퍼블리싱 100% · 기획/디자인 협업</strong></li>
+        </ul>
+        <p class="works-point">성과/특징: CAFE24 기반 리뉴얼 프로젝트로, PC/모바일 퍼블리싱을 담당. 다양한 페이지 유형과 상품 기능관련 js(jQuery) 대응하며, 운영을 고려한 구조로 마크업을 구성</p>
+      </article>
+
+      <article class="swiper-slide works-card">
+        <div class="works-card-top">
+          <p class="works-project">미쏘 & 로엠 모바일 구축</p>
+          <p class="works-brand">브랜드: E-Land MIXXO & ROEM</p>
+        </div>
+        <ul class="works-meta">
+          <li><span>미쏘</span><strong>2021.03 ~ 2021.04</strong></li>
+          <li><span>로엠</span><strong>2021.08 ~ 2021.09</strong></li>
+          <li><span>솔루션</span><strong>CAFE24</strong></li>
+          <li><span>범위</span><strong>모바일</strong></li>
+          <li><span>역할</span><strong>퍼블리싱 100% · 백엔드 협업</strong></li>
+        </ul>
+        <p class="works-point">성과/특징: CAFE24 솔루션 환경에서 모바일 중심 퍼블리싱을 담당. 브랜드별 화면 특성과 운영 요구사항에 맞춰 모바일 UI를 구현했으며, 일정 내 안정적인 구축 완료</p>
+      </article>
+
+      <article class="swiper-slide works-card">
+        <div class="works-card-top">
+          <p class="works-project">스파오 유지보수</p>
+          <p class="works-brand">브랜드: E-Land SPAO</p>
+        </div>
+        <ul class="works-meta">
+          <li><span>유형</span><strong>유지보수</strong></li>
+          <li><span>솔루션</span><strong>CAFE24</strong></li>
+          <li><span>범위</span><strong>PC · 모바일</strong></li>
+          <li><span>역할</span><strong>운영 및 수정</strong></li>
+        </ul>
+        <p class="works-point">성과/특징: 운영 중인 쇼핑몰의 유지보수 퍼블리싱을 담당하며, 페이지 수정/개선 요청과 이슈 대응. 기존 구조를 빠르게 파악해 안정적으로 반영</p>
+      </article>
+
+      <article class="swiper-slide works-card">
+        <div class="works-card-top">
+          <p class="works-project">즈윌링 서브페이지 제작 및 기능 추가</p>
+          <p class="works-brand">브랜드: 즈윌링(ZWILLING)</p>
+        </div>
+        <ul class="works-meta">
+          <li><span>유형</span><strong>신규 서브페이지 제작 / 기능 추가</strong></li>
+          <li><span>솔루션</span><strong>CAFE24</strong></li>
+          <li><span>범위</span><strong>PC · 모바일</strong></li>
+          <li><span>역할</span><strong>퍼블리싱 및 기능 추가</strong></li>
+        </ul>
+        <p class="works-point">성과/특징: 기존 사이트 내 신규 서브페이지 퍼블리싱과 기능 추가 작업. 기존 화면 흐름과 UI 톤을 유지하면서 신규 요소를 자연스럽게 연결하고, 운영 중 서비스에 무리 없이 적용</p>
+      </article>
+
+      <article class="swiper-slide works-card">
+        <div class="works-card-top">
+          <p class="works-project">창과방패 법무법인 신규 구축</p>
+          <p class="works-brand">Client : 창과방패 법무법인</p>
+        </div>
+        <ul class="works-meta">
+          <li><span>기간</span><strong>2020.12 ~ 2021.01</strong></li>
+          <li><span>유형</span><strong>신규 구축</strong></li>
+          <li><span>솔루션</span><strong>고도몰</strong></li>
+          <li><span>범위</span><strong>PC · 모바일</strong></li>
+          <li><span>역할</span><strong>퍼블리싱 100% · 디자이너/개발 협업</strong></li>
+        </ul>
+        <p class="works-point">성과/특징: 고도몰 솔루션 기반으로 PC/모바일 신규 구축 퍼블리싱. 초기 구축 단계에서 주요 화면을 구현하고, 서비스 오픈을 고려한 기본 구조와 UI를 안정적으로 구성</p>
+      </article>
+
+      <article class="swiper-slide works-card">
+        <div class="works-card-top">
+          <p class="works-project">라인프렌즈 팝업스토어 페이지 제작</p>
+          <p class="works-brand">Client : LINE FRIENDS</p>
+        </div>
+        <ul class="works-meta">
+          <li><span>기간</span><strong>2022.08 (2 Weeks)</strong></li>
+          <li><span>유형</span><strong>신규 팝업스토어 페이지 제작</strong></li>
+          <li><span>범위</span><strong>PC · 모바일</strong></li>
+          <li><span>역할</span><strong>퍼블리싱 100% · 디자이너 협업</strong></li>
+        </ul>
+        <p class="works-point">성과/특징: 디자이너와 소통하며, 해당 팝업스토어 페이지 반응형 & 인터렉션 최적화 페이지 제작 완료</p>
+      </article>
+    </div>
+
+    <div class="works-controls">
+      <button class="works-nav works-prev" type="button" aria-label="이전 작업 보기">Prev</button>
+      <div class="works-pagination"></div>
+      <button class="works-nav works-next" type="button" aria-label="다음 작업 보기">Next</button>
+    </div>
+  </div>
+</section>
+
 <!-- ══ SKILLS ══ -->
 <section id="skills" class="sec">
   <div class="sec-header fade-up">
-    <span class="sec-num">02</span>
+    <span class="sec-num">03</span>
     <h2 class="sec-title">Skills</h2>
     <div class="sec-line"></div>
   </div>
@@ -228,7 +353,7 @@
 <!-- ══ ABOUT ══ -->
 <section id="about" class="sec">
   <div class="sec-header fade-up">
-    <span class="sec-num">03</span>
+    <span class="sec-num">04</span>
     <h2 class="sec-title">About</h2>
     <div class="sec-line"></div>
   </div>
@@ -274,6 +399,7 @@
   <span>© 2025 신동혁 · Web Publisher Portfolio</span>
   <span>Built with HTML · CSS · Vanilla JS</span>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="/js/main.js?v=20260302"></script>
 </body>
 </html>
