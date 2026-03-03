@@ -437,6 +437,10 @@ body::before{
 .visitor-counter{margin-top:clamp(1.2rem,2.6vw,2rem);display:inline-flex;flex-direction:column;gap:.45rem;align-items:center;font-family:var(--sans);font-size:clamp(.66rem,1.4vw,.8rem);color:var(--dim);letter-spacing:.08em}
 .visitor-counter-row{margin:0}
 .visitor-counter strong{color:var(--accent);font-weight:600;margin-left:.35rem}
+.contact-title span.ani_bg {color:transparent;background:linear-gradient(to left, var(--text), var(--accent));-webkit-background-clip:text;background-clip:text; animation:shine 3s linear infinite; background-size: 200% auto;}
+@keyframes shine {
+  to {background-position:200% center;}
+}
 
 /* FOOTER */
 footer{
