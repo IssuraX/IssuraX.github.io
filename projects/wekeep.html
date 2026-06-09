@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
   <title>Wekeep 홈페이지 리뉴얼 | 신동혁 Portfolio</title>
   <meta name="description" content="자체 서비스 홈페이지 리뉴얼: 반응형 UI 구현, SCSS 구조화, 템플릿화"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/projects.css?v=20260302">
 </head>
 <body>
-<nav id="mainNav">
+<a href="#project-content" class="skip-nav">본문 바로가기</a>
+<nav id="mainNav" aria-label="주요 메뉴">
   <a href="../index.html" class="nav-logo">SDH.DEV</a>
   <ul class="nav-links">
     <li><a href="../index.html#projects">Projects</a></li>
@@ -22,7 +21,7 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
-<nav class="nav-drawer" id="navDrawer" aria-hidden="true">
+<nav class="nav-drawer" id="navDrawer" aria-label="모바일 메뉴" aria-hidden="true">
   <ul>
     <li><a href="../index.html#projects">Projects</a></li>
     <li><a href="../index.html#skills">Skills</a></li>
@@ -59,7 +58,7 @@
   </div>
 
   <div class="proj-body" style="max-width:1400px;margin:0 auto">
-    <main>
+    <main id="project-content">
       <div class="cs-section fade-up">
         <p class="cs-label" data-n="01">Overview</p>
         <h2 class="cs-title">프로젝트 요약</h2>

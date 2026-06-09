@@ -24,7 +24,7 @@ document.documentElement.classList.replace('no-js','js-ready');
     ctx.clearRect(0,0,W,H);
     for(let i=0,l=dots.length;i<l;i++){
       const d=dots[i],ddx=d.x-d.ox,ddy=d.y-d.oy,disp=Math.sqrt(ddx*ddx+ddy*ddy),t=Math.min(disp/MP,1);
-      const Rv=Math.round(50+(232-50)*t),Gv=Math.round(50+(255-50)*t),Bv=Math.round(50+(71-50)*t);
+      const Rv=Math.round(120+(56-120)*t),Gv=Math.round(190+(170-190)*t),Bv=Math.round(235+(245-235)*t);
       ctx.beginPath();ctx.arc(d.x,d.y,RA+t*2.2,0,Math.PI*2);
       ctx.fillStyle=`rgba(${Rv},${Gv},${Bv},${.18+t*.55})`;ctx.fill();
     }
@@ -221,6 +221,8 @@ document.documentElement.classList.replace('no-js','js-ready');
     a.addEventListener('click',()=>{
       hamburger.classList.remove('open');
       navDrawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded','false');
+      navDrawer.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
     });
   });
@@ -228,6 +230,8 @@ document.documentElement.classList.replace('no-js','js-ready');
     if(e.key==='Escape'&&navDrawer.classList.contains('open')){
       hamburger.classList.remove('open');
       navDrawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded','false');
+      navDrawer.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
     }
   });

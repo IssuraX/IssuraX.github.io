@@ -8,16 +8,15 @@
   <meta property="og:title" content="신동혁 | Web Publisher Portfolio"/>
   <meta property="og:description" content="운영까지 책임지는 웹 퍼블리셔 | 4년 5개월 실무 경험"/>
   <meta property="og:type" content="website"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css?v=20260302">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   <link rel="icon" type="image/png" href="favicon.ico"/>
 </head>
 <body>
+<a href="#main-content" class="skip-nav">본문 바로가기</a>
 
 <!-- ══ NAV ══ -->
-<nav id="mainNav">
+<nav id="mainNav" aria-label="주요 메뉴">
   <a href="#hero" class="nav-logo">SDH.DEV</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#projects">Projects</a></li>
@@ -31,7 +30,7 @@
   </button>
 </nav>
 
-<nav class="nav-drawer" id="navDrawer" aria-hidden="true">
+<nav class="nav-drawer" id="navDrawer" aria-label="모바일 메뉴" aria-hidden="true">
   <ul>
     <li><a href="#hero">Home</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -41,6 +40,8 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
+
+<main id="main-content">
 
 <!-- 사이드 도트 -->
 <div id="side-nav">
@@ -389,17 +390,20 @@
     <a href="https://github.com/IssuraX" class="contact-link" target="_blank"><span class="contact-link-label">GitHub</span><span class="contact-link-val">github.com/IssuraX</span></a>
     <a href="assets/resume_hyeok.pdf" class="contact-link" target="_blank"><span class="contact-link-label">Resume</span><span class="contact-link-val">이력서 PDF</span></a>
   </div>
+  <!--
   <div class="visitor-counter fade-up" aria-live="polite">
     <p class="visitor-counter-row">Yesterday : <strong id="visitorYesterday">0명</strong></p>
     <p class="visitor-counter-row">Today : <strong id="visitorToday">불러오는 중...</strong></p>
   </div>
+  -->
 </section>
+</main>
 
 <footer>
   <span>© 2025 신동혁 · Web Publisher Portfolio</span>
   <span>Built with HTML · CSS · Vanilla JS</span>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="/js/main.js?v=20260302"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
