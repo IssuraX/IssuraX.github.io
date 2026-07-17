@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://issurax.github.io/sitemap.xml

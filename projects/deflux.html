@@ -3,9 +3,42 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
-  <title>대림 계열사 홈페이지 운영 및 UI 개선 | 신동혁 Portfolio</title>
-  <meta name="description" content="운영 환경에서의 퍼블리싱 및 UI 이슈 대응, 유지보수 효율 개선 사례"/>
-  <link rel="stylesheet" href="../css/projects.css?v=20260302">
+  <title>대림 계열사 홈페이지 운영 및 UI 개선 | 신동혁 포트폴리오</title>
+  <meta name="description" content="복수 도메인 운영 퍼블리싱을 전담하며 UI·반응형·브라우저 이슈를 개선하고 공통 스타일을 정리한 사례입니다."/>
+  <meta name="robots" content="index,follow,max-image-preview:large"/>
+  <meta name="theme-color" content="#f7fbff"/>
+  <link rel="canonical" href="https://issurax.github.io/projects/deflux.html"/>
+  <meta property="og:title" content="대림 계열사 홈페이지 운영 및 UI 개선"/>
+  <meta property="og:description" content="운영 이슈 대응과 복수 도메인 운영 퍼블리싱 사례"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://issurax.github.io/projects/deflux.html"/>
+  <meta property="og:site_name" content="신동혁 Web Publisher Portfolio"/>
+  <meta property="og:locale" content="ko_KR"/>
+  <meta property="og:image" content="https://issurax.github.io/assets/pj001.jpg"/>
+  <meta property="og:image:width" content="1600"/>
+  <meta property="og:image:height" content="792"/>
+  <meta property="og:image:alt" content="대림 계열사 운영 프로젝트 화면"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="대림 계열사 홈페이지 운영 및 UI 개선"/>
+  <meta name="twitter:description" content="운영 안정, 이슈 대응, 유지보수 효율 개선 사례"/>
+  <meta name="twitter:image" content="https://issurax.github.io/assets/pj001.jpg"/>
+  <meta name="twitter:image:alt" content="대림 계열사 운영 프로젝트 화면"/>
+  <link rel="stylesheet" href="../css/projects.css?v=20260717">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "대림 계열사 홈페이지 운영 및 UI 개선",
+    "url": "https://issurax.github.io/projects/deflux.html",
+    "description": "복수 도메인 운영 퍼블리싱과 UI 이슈 대응, 유지보수 효율 개선 사례",
+    "image": "https://issurax.github.io/assets/pj001.jpg",
+    "dateCreated": "2024-01",
+    "dateModified": "2026-07-17",
+    "inLanguage": "ko-KR",
+    "keywords": ["웹 퍼블리싱", "운영 유지보수", "SCSS", "반응형", "jQuery"],
+    "author": {"@type": "Person", "name": "신동혁", "url": "https://issurax.github.io/"}
+  }
+  </script>
 </head>
 <body>
 <a href="#project-content" class="skip-nav">본문 바로가기</a>
@@ -19,11 +52,11 @@
     <li><a href="../index.html#about">About</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
-    <span></span><span></span><span></span>
+  <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navDrawer">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
 </nav>
-<nav class="nav-drawer" id="navDrawer" aria-label="모바일 메뉴" aria-hidden="true">
+<nav class="nav-drawer" id="navDrawer" aria-label="모바일 메뉴" aria-hidden="true" inert>
   <ul>
     <li><a href="../index.html#projects">Projects</a></li>
     <li><a href="../index.html#skills">Skills</a></li>
@@ -53,7 +86,7 @@
             <span><strong>기간</strong> 2024.01 — 2025.09</span>
             <span><strong>소속</strong> 디플럭스씨앤씨</span>
             <span><strong>역할</strong> 퍼블리싱 전담</span>
-            <span><strong>기여도</strong> 100%</span>
+            <span><strong>담당 범위</strong> 운영 · 개선 · 제작</span>
           </div>
         </div>
         <div class="proj-index">01</div>
@@ -75,6 +108,11 @@
           <p>대림 계열사 복수 도메인의 운영 퍼블리싱을 전담했습니다. 운영 중 발생하는 UI 버그, 반응형 깨짐, 브라우저 이슈를 대응하고, 공통 스타일 및 중복 코드를 정리해 유지보수 효율을 개선했습니다.</p>
           <p>단순 이슈 처리에 그치지 않고 재발 방지를 위한 구조 개선을 병행해 운영 품질을 지속적으로 안정화했습니다.</p>
         </div>
+        <dl class="contribution-grid" aria-label="핵심 기여 범위">
+          <div><dt>My Role</dt><dd>복수 도메인 운영 퍼블리싱 전담</dd></div>
+          <div><dt>Collaboration</dt><dd>Git·Jira 기반 이슈 분류와 진행 관리</dd></div>
+          <div><dt>Quality Check</dt><dd>반응형·브라우저 재현 조건 문서화</dd></div>
+        </dl>
       </div>
       <div class="cs-divider"></div>
 
@@ -107,27 +145,28 @@
         <p class="cs-label" data-n="04">Result</p>
         <h2 class="cs-title">결과</h2>
         <ul class="cs-list">
-          <li>월 평균 50건 내외 운영 이슈를 안정적으로 처리하며 서비스 품질 유지</li>
+          <li>다양한 유형의 운영 이슈를 지속적으로 처리하며 서비스 품질 유지</li>
           <li>반복 이슈 및 QA 수정 요청이 감소하여 팀 전체 대응 비용 절감</li>
           <li>공통 스타일 정리 이후 유지보수 시 수정 시간 단축 및 코드 안정성 향상</li>
         </ul>
         <div class="cs-metrics">
           <div class="cs-metric">
-            <div class="cs-metric-num">50+</div>
-            <div class="cs-metric-label">Monthly Issues</div>
-            <div class="cs-metric-desc">월 평균 이슈 처리 건수</div>
+            <div class="cs-metric-num">상시</div>
+            <div class="cs-metric-label">Issue Response</div>
+            <div class="cs-metric-desc">운영 이슈 분류 및 대응</div>
           </div>
           <div class="cs-metric">
-            <div class="cs-metric-num">4개</div>
+            <div class="cs-metric-num">복수</div>
             <div class="cs-metric-label">Domains</div>
-            <div class="cs-metric-desc">운영 담당 도메인 수</div>
+            <div class="cs-metric-desc">계열사 도메인 운영</div>
           </div>
           <div class="cs-metric">
-            <div class="cs-metric-num">100%</div>
+            <div class="cs-metric-num">전담</div>
             <div class="cs-metric-label">Publishing</div>
-            <div class="cs-metric-desc">퍼블리싱 전담 기여도</div>
+            <div class="cs-metric-desc">운영 퍼블리싱 담당</div>
           </div>
         </div>
+        <p class="evidence-note"><strong>정리 기준</strong> 운영 기간에 수행한 이슈 대응, 도메인 운영, 퍼블리싱 역할을 기준으로 정리했습니다.</p>
       </div>
 
     </main>
@@ -139,18 +178,18 @@
         <div class="kv-row"><span class="kv-key">기간</span><span class="kv-val">2024.01 – 2025.09</span></div>
         <div class="kv-row"><span class="kv-key">소속</span><span class="kv-val">디플럭스씨앤씨</span></div>
         <div class="kv-row"><span class="kv-key">역할</span><span class="kv-val">퍼블리싱 전담<br/>(운영/개선/제작)</span></div>
-        <div class="kv-row"><span class="kv-key">기여도</span><span class="kv-val">100%</span></div>
+        <div class="kv-row"><span class="kv-key">담당 범위</span><span class="kv-val">운영 · 개선 · 제작</span></div>
         <div class="kv-row"><span class="kv-key">스택</span><span class="kv-val">HTML/CSS(SCSS)<br/>JavaScript/jQuery<br/>Git</span></div>
         <div class="kv-row"><span class="kv-key">환경</span><span class="kv-val">운영/유지보수</span></div>
       </div>
 
       <div class="proj-img-wrap fade-up">
-        <img src="../assets/pj001.png" alt="대림 계열사 운영 프로젝트 화면 1" loading="lazy"
+        <img src="../assets/pj001.jpg" alt="대림 계열사 운영 프로젝트 화면 1" width="1600" height="792" loading="lazy" decoding="async"
           onerror="this.parentElement.style.display='none'"/>
         <p class="proj-img-label">운영 화면 01</p>
       </div>
       <div class="proj-img-wrap fade-up">
-        <img src="../assets/pj002.png" alt="대림 계열사 운영 프로젝트 화면 2" loading="lazy"
+        <img src="../assets/pj002.jpg" alt="대림 계열사 운영 프로젝트 화면 2" width="1600" height="892" loading="lazy" decoding="async"
           onerror="this.parentElement.style.display='none'"/>
         <p class="proj-img-label">운영 화면 02</p>
       </div>
@@ -173,10 +212,10 @@
 </div><!-- /.page -->
 
 <footer>
-  <span>© 2025 신동혁 · Web Publisher Portfolio</span>
+  <span>© <time class="current-year" datetime="2026">2026</time> 신동혁 · Web Publisher Portfolio</span>
   <span><a href="../index.html" style="color:var(--dim);text-decoration:none">← Back to Home</a></span>
 </footer>
 
-<script src="../js/projects.js?v=20260302"></script>
+<script src="../js/projects.js?v=20260717"></script>
 </body>
 </html>

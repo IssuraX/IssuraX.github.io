@@ -1,274 +1,646 @@
 /* JS 활성화 표시 (fade-up 애니메이션 활성화) */
-document.documentElement.classList.replace('no-js','js-ready');
+document.documentElement.classList.replace('no-js', 'js-ready');
+
+document.querySelectorAll('.current-year').forEach((element) => {
+  const year = String(new Date().getFullYear());
+  element.textContent = year;
+  element.setAttribute('datetime', year);
+});
+
+const prefersReducedMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
+const usesCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
 /* ══ PARTICLE CANVAS ══ */
-(function(){
-  const canvas=document.getElementById('hero-canvas');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  const SP=38,RA=1.5,RR=130,SPR=0.06,DAM=0.78,MP=55;
-  let W,H,dots=[],mx=-9999,my=-9999,raf;
-  function Dot(ox,oy){this.ox=ox;this.oy=oy;this.x=ox;this.y=oy;this.vx=0;this.vy=0}
-  function build(){
-    W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;dots=[];
-    const cols=Math.ceil(W/SP)+2,rows=Math.ceil(H/SP)+2;
-    const ox0=(W-(cols-1)*SP)/2,oy0=(H-(rows-1)*SP)/2;
-    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)dots.push(new Dot(ox0+c*SP,oy0+r*SP));
+(function initParticleCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  const hero = document.getElementById('hero');
+
+  if (!canvas || !hero || prefersReducedMotion || usesCoarsePointer) return;
+
+  const context = canvas.getContext('2d');
+  if (!context) return;
+
+  const spacing = 38;
+  const baseRadius = 1.5;
+  const reactionRadius = 130;
+  const spring = 0.06;
+  const damping = 0.78;
+  const maxPush = 55;
+
+  let width = 0;
+  let height = 0;
+  let dots = [];
+  let mouseX = -9999;
+  let mouseY = -9999;
+  let animationFrame = null;
+  let isActive = true;
+  let resizeTimer = null;
+
+  function createDot(originX, originY) {
+    return {
+      originX,
+      originY,
+      x: originX,
+      y: originY,
+      velocityX: 0,
+      velocityY: 0
+    };
   }
-  function frame(){
-    for(let i=0,l=dots.length;i<l;i++){
-      const d=dots[i],dx=d.x-mx,dy=d.y-my,dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<RR&&dist>0){const f=(1-dist/RR)*MP;d.vx+=(dx/dist)*f*.14;d.vy+=(dy/dist)*f*.14}
-      d.vx+=(d.ox-d.x)*SPR;d.vy+=(d.oy-d.y)*SPR;d.vx*=DAM;d.vy*=DAM;d.x+=d.vx;d.y+=d.vy;
+
+  function buildDots() {
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+    dots = [];
+
+    const columns = Math.ceil(width / spacing) + 2;
+    const rows = Math.ceil(height / spacing) + 2;
+    const startX = (width - (columns - 1) * spacing) / 2;
+    const startY = (height - (rows - 1) * spacing) / 2;
+
+    for (let row = 0; row < rows; row += 1) {
+      for (let column = 0; column < columns; column += 1) {
+        dots.push(createDot(startX + column * spacing, startY + row * spacing));
+      }
     }
-    ctx.clearRect(0,0,W,H);
-    for(let i=0,l=dots.length;i<l;i++){
-      const d=dots[i],ddx=d.x-d.ox,ddy=d.y-d.oy,disp=Math.sqrt(ddx*ddx+ddy*ddy),t=Math.min(disp/MP,1);
-      const Rv=Math.round(120+(56-120)*t),Gv=Math.round(190+(170-190)*t),Bv=Math.round(235+(245-235)*t);
-      ctx.beginPath();ctx.arc(d.x,d.y,RA+t*2.2,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${Rv},${Gv},${Bv},${.18+t*.55})`;ctx.fill();
+  }
+
+  function updateDots() {
+    dots.forEach((dot) => {
+      const deltaX = dot.x - mouseX;
+      const deltaY = dot.y - mouseY;
+      const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+
+      if (distance < reactionRadius && distance > 0) {
+        const force = (1 - distance / reactionRadius) * maxPush;
+        dot.velocityX += (deltaX / distance) * force * 0.14;
+        dot.velocityY += (deltaY / distance) * force * 0.14;
+      }
+
+      dot.velocityX += (dot.originX - dot.x) * spring;
+      dot.velocityY += (dot.originY - dot.y) * spring;
+      dot.velocityX *= damping;
+      dot.velocityY *= damping;
+      dot.x += dot.velocityX;
+      dot.y += dot.velocityY;
+    });
+  }
+
+  function drawDots() {
+    context.clearRect(0, 0, width, height);
+
+    dots.forEach((dot) => {
+      const offsetX = dot.x - dot.originX;
+      const offsetY = dot.y - dot.originY;
+      const displacement = Math.sqrt(offsetX ** 2 + offsetY ** 2);
+      const intensity = Math.min(displacement / maxPush, 1);
+      const red = Math.round(120 + (56 - 120) * intensity);
+      const green = Math.round(190 + (170 - 190) * intensity);
+      const blue = Math.round(235 + (245 - 235) * intensity);
+
+      context.beginPath();
+      context.arc(
+        dot.x,
+        dot.y,
+        baseRadius + intensity * 2.2,
+        0,
+        Math.PI * 2
+      );
+      context.fillStyle = `rgba(${red}, ${green}, ${blue}, ${0.18 + intensity * 0.55})`;
+      context.fill();
+    });
+  }
+
+  function animate() {
+    if (!isActive) {
+      animationFrame = null;
+      return;
     }
-    raf=requestAnimationFrame(frame);
+
+    updateDots();
+    drawDots();
+    animationFrame = requestAnimationFrame(animate);
   }
-  function init(){build();if(raf)cancelAnimationFrame(raf);frame()}
-  init();
-  let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(init,150)});
-  const heroEl=document.getElementById('hero');
-  heroEl.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
-  heroEl.addEventListener('mouseleave',()=>{mx=-9999;my=-9999});
-  if(window.matchMedia('(pointer:coarse)').matches){
-    heroEl.addEventListener('touchmove',e=>{const r=canvas.getBoundingClientRect();mx=e.touches[0].clientX-r.left;my=e.touches[0].clientY-r.top},{passive:true});
-    heroEl.addEventListener('touchend',()=>{mx=-9999;my=-9999});
+
+  function startAnimation() {
+    if (!animationFrame) animationFrame = requestAnimationFrame(animate);
   }
+
+  function stopAnimation() {
+    if (!animationFrame) return;
+    cancelAnimationFrame(animationFrame);
+    animationFrame = null;
+  }
+
+  function rebuildCanvas() {
+    stopAnimation();
+    buildDots();
+    startAnimation();
+  }
+
+  function setActiveState(nextState) {
+    isActive = nextState;
+    if (isActive) startAnimation();
+    else stopAnimation();
+  }
+
+  rebuildCanvas();
+
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(rebuildCanvas, 150);
+  });
+
+  if (supportsIntersectionObserver) {
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      setActiveState(entry.isIntersecting && !document.hidden);
+    });
+    heroObserver.observe(hero);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    const heroRect = hero.getBoundingClientRect();
+    const isHeroVisible = heroRect.bottom > 0 && heroRect.top < window.innerHeight;
+    setActiveState(!document.hidden && isHeroVisible);
+  });
+
+  hero.addEventListener('mousemove', (event) => {
+    const canvasRect = canvas.getBoundingClientRect();
+    mouseX = event.clientX - canvasRect.left;
+    mouseY = event.clientY - canvasRect.top;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    mouseX = -9999;
+    mouseY = -9999;
+  });
 })();
 
 /* ══ GLOW FOLLOW ══ */
-(function(){
-  const glow=document.getElementById('hero-glow');
-  const hero=document.getElementById('hero');
-  if(!glow||!hero)return;
-  let tx=0,ty=0,cx=0,cy=0;
-  hero.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;glow.style.opacity='1'});
-  hero.addEventListener('mouseleave',()=>{glow.style.opacity='0'});
-  (function a(){cx+=(tx-cx)*.07;cy+=(ty-cy)*.07;glow.style.left=cx+'px';glow.style.top=cy+'px';requestAnimationFrame(a)})();
+(function initGlowFollow() {
+  const glow = document.getElementById('hero-glow');
+  const hero = document.getElementById('hero');
+
+  if (!glow || !hero || prefersReducedMotion || usesCoarsePointer) return;
+
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  let animationFrame = null;
+
+  function animateGlow() {
+    currentX += (targetX - currentX) * 0.07;
+    currentY += (targetY - currentY) * 0.07;
+    glow.style.left = `${currentX}px`;
+    glow.style.top = `${currentY}px`;
+
+    const isMoving =
+      Math.abs(targetX - currentX) > 0.2 || Math.abs(targetY - currentY) > 0.2;
+
+    animationFrame = isMoving ? requestAnimationFrame(animateGlow) : null;
+  }
+
+  hero.addEventListener('mousemove', (event) => {
+    targetX = event.clientX;
+    targetY = event.clientY;
+    glow.style.opacity = '1';
+    if (!animationFrame) animationFrame = requestAnimationFrame(animateGlow);
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
 })();
 
 /* ══ PARALLAX ══ */
-(function(){
-  if(window.matchMedia('(pointer:coarse)').matches)return;
-  const hero=document.getElementById('hero');
-  const left=hero.querySelector('.hero-left'),right=hero.querySelector('.hero-right');
-  if(!left||!right)return;
-  left.style.transition=right.style.transition='transform .6s cubic-bezier(.23,1,.32,1)';
-  hero.addEventListener('mousemove',e=>{
-    const r=hero.getBoundingClientRect(),nx=(e.clientX-r.left)/r.width-.5,ny=(e.clientY-r.top)/r.height-.5;
-    left.style.transform=`translate(${nx*8}px,${ny*5}px)`;
-    right.style.transform=`translate(${-nx*10}px,${-ny*6}px)`;
+(function initHeroParallax() {
+  if (prefersReducedMotion || usesCoarsePointer) return;
+
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+
+  const leftColumn = hero.querySelector('.hero-left');
+  const rightColumn = hero.querySelector('.hero-right');
+  if (!leftColumn || !rightColumn) return;
+
+  const transition = 'transform .6s cubic-bezier(.23, 1, .32, 1)';
+  leftColumn.style.transition = transition;
+  rightColumn.style.transition = transition;
+
+  hero.addEventListener('mousemove', (event) => {
+    const heroRect = hero.getBoundingClientRect();
+    const horizontalRatio = (event.clientX - heroRect.left) / heroRect.width - 0.5;
+    const verticalRatio = (event.clientY - heroRect.top) / heroRect.height - 0.5;
+
+    leftColumn.style.transform =
+      `translate(${horizontalRatio * 8}px, ${verticalRatio * 5}px)`;
+    rightColumn.style.transform =
+      `translate(${-horizontalRatio * 10}px, ${-verticalRatio * 6}px)`;
   });
-  hero.addEventListener('mouseleave',()=>{left.style.transform=right.style.transform=''});
+
+  hero.addEventListener('mouseleave', () => {
+    leftColumn.style.transform = '';
+    rightColumn.style.transform = '';
+  });
 })();
 
 /* ══ HERO TEXT ANIMATIONS ══ */
-(function(){
-  const label=document.getElementById('heroLabel');
-  const nameWrap=document.getElementById('heroNameWrap'),charsEl=document.getElementById('heroNameChars');
-  const role=document.getElementById('heroRole'),roleText=document.getElementById('heroRoleText'),roleCur=document.getElementById('heroRoleCursor');
-  const desc=document.getElementById('heroDesc'),tags=document.getElementById('heroTags'),cta=document.getElementById('heroCta');
-  const sc1=document.getElementById('sc1'),sc2=document.getElementById('sc2'),sc3=document.getElementById('sc3');
-  const NAME='신동혁',ROLE='Web Publisher';
-  const GL='SHINDONGHYEOKWEBPUBLISHER'.split('');
+(function initHeroTextAnimations() {
+  const label = document.getElementById('heroLabel');
+  const nameWrapper = document.getElementById('heroNameWrap');
+  const nameCharacters = document.getElementById('heroNameChars');
+  const role = document.getElementById('heroRole');
+  const roleText = document.getElementById('heroRoleText');
+  const roleCursor = document.getElementById('heroRoleCursor');
+  const description = document.getElementById('heroDesc');
+  const tags = document.getElementById('heroTags');
+  const callToAction = document.getElementById('heroCta');
+  const statCards = [
+    document.getElementById('sc1'),
+    document.getElementById('sc2'),
+    document.getElementById('sc3')
+  ].filter(Boolean);
 
-  setTimeout(()=>label.classList.add('in'),200);
+  const requiredElements = [
+    label,
+    nameWrapper,
+    nameCharacters,
+    role,
+    roleText,
+    roleCursor,
+    description,
+    tags,
+    callToAction
+  ];
+  if (requiredElements.some((element) => !element)) return;
 
-  const chars=NAME.split('').map((ch,i)=>({final:ch,el:null,settled:false,delay:400+i*120}));
-  chars.forEach(c=>{
-    const s=document.createElement('span');s.className='char';
-    s.textContent=GL[Math.floor(Math.random()*GL.length)];c.el=s;charsEl.appendChild(s);
+  const name = '신동혁';
+  const jobTitle = 'Web Publisher';
+  const glitchCharacters = [...'SHINDONGHYEOKWEBPUBLISHER'];
+
+  function revealAllImmediately() {
+    label.classList.add('in');
+    nameCharacters.textContent = name;
+    role.classList.add('in');
+    roleText.textContent = jobTitle;
+    roleCursor.style.display = 'none';
+    [description, tags, callToAction, ...statCards].forEach((element) => {
+      element.classList.add('in');
+    });
+  }
+
+  if (prefersReducedMotion) {
+    revealAllImmediately();
+    return;
+  }
+
+  function randomGlitchCharacter() {
+    return glitchCharacters[Math.floor(Math.random() * glitchCharacters.length)];
+  }
+
+  function triggerNameGlitch() {
+    nameWrapper.classList.add('glitch');
+    setTimeout(() => nameWrapper.classList.remove('glitch'), 400);
+  }
+
+  function animateStatNumber(statCard) {
+    const numberElement = statCard.querySelector('.stat-num');
+    if (!numberElement || !numberElement.dataset.count) return;
+
+    const target = Number.parseFloat(numberElement.dataset.count);
+    if (!Number.isFinite(target)) return;
+
+    const suffix = numberElement.dataset.suffix || '';
+    const hasDecimal = !Number.isInteger(target);
+    const duration = 1200;
+    let startedAt = null;
+
+    function easeOut(progress) {
+      return 1 - (1 - progress) ** 3;
+    }
+
+    function update(timestamp) {
+      if (!startedAt) startedAt = timestamp;
+
+      const progress = Math.min((timestamp - startedAt) / duration, 1);
+      const value = easeOut(progress) * target;
+      const displayValue = hasDecimal ? value.toFixed(1) : Math.floor(value);
+      numberElement.textContent = `${displayValue}${suffix}`;
+
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  setTimeout(() => label.classList.add('in'), 200);
+
+  const characters = [...name].map((finalCharacter, index) => ({
+    finalCharacter,
+    element: null,
+    delay: 400 + index * 120
+  }));
+
+  characters.forEach((character) => {
+    const characterElement = document.createElement('span');
+    characterElement.className = 'char';
+    characterElement.textContent = randomGlitchCharacter();
+    character.element = characterElement;
+    nameCharacters.appendChild(characterElement);
   });
-  chars.forEach(c=>{
-    setTimeout(()=>{
-      c.el.style.opacity='1';c.el.style.transform='translateY(0)';
-      let it=0;
-      const sc=setInterval(()=>{
-        if(it++>6||c.settled){c.el.textContent=c.final;c.el.style.color='';c.settled=true;clearInterval(sc)}
-        else{c.el.textContent=GL[Math.floor(Math.random()*GL.length)];c.el.style.color=it%2?'var(--accent2)':'var(--accent)'}
-      },55);
-    },c.delay);
+
+  characters.forEach((character) => {
+    setTimeout(() => {
+      const { element } = character;
+      if (!element) return;
+
+      element.style.opacity = '1';
+      element.style.transform = 'translateY(0)';
+
+      let iteration = 0;
+      const scrambleTimer = setInterval(() => {
+        if (iteration > 6) {
+          element.textContent = character.finalCharacter;
+          element.style.color = '';
+          clearInterval(scrambleTimer);
+          return;
+        }
+
+        element.textContent = randomGlitchCharacter();
+        element.style.color = iteration % 2 ? 'var(--accent2)' : 'var(--accent)';
+        iteration += 1;
+      }, 55);
+    }, character.delay);
   });
 
-  const lastDelay=chars[chars.length-1].delay+400;
-  function trigGlitch(){nameWrap.classList.add('glitch');setTimeout(()=>nameWrap.classList.remove('glitch'),400)}
-  setTimeout(()=>{trigGlitch();setInterval(trigGlitch,6000+Math.random()*4000)},lastDelay+300);
+  const lastCharacterDelay = characters.at(-1).delay + 400;
 
-  setTimeout(()=>{
-    role.classList.add('in');let i=0;
-    const t=setInterval(()=>{
-      if(i<=ROLE.length){roleText.textContent=ROLE.slice(0,i);i++}
-      else{clearInterval(t);setTimeout(()=>roleCur.style.display='none',1500)}
-    },65);
-  },lastDelay-100);
+  setTimeout(() => {
+    triggerNameGlitch();
+    setInterval(triggerNameGlitch, 7000);
+  }, lastCharacterDelay + 300);
 
-  const base=lastDelay+200;
-  setTimeout(()=>desc.classList.add('in'),base);
-  setTimeout(()=>tags.classList.add('in'),base+150);
-  setTimeout(()=>cta.classList.add('in'),base+300);
+  setTimeout(() => {
+    role.classList.add('in');
+    let visibleLength = 0;
 
-  /* stat counter */
-  [sc1,sc2,sc3].forEach((el,i)=>{
-    if(!el)return;
-    setTimeout(()=>{
-      el.classList.add('in');
-      const numEl=el.querySelector('.stat-num');
-      const target=parseFloat(numEl.dataset.count),suffix=numEl.dataset.suffix||'',isF=String(target).includes('.');
-      let st=null;
-      const eO=t=>1-Math.pow(1-t,3);
-      const run=ts=>{if(!st)st=ts;const p=Math.min((ts-st)/1200,1),v=eO(p)*target;numEl.textContent=(isF?v.toFixed(1):Math.floor(v))+suffix;if(p<1)requestAnimationFrame(run)};
-      requestAnimationFrame(run);
-    },base+400+i*140);
+    const typingTimer = setInterval(() => {
+      if (visibleLength <= jobTitle.length) {
+        roleText.textContent = jobTitle.slice(0, visibleLength);
+        visibleLength += 1;
+        return;
+      }
+
+      clearInterval(typingTimer);
+      setTimeout(() => {
+        roleCursor.style.display = 'none';
+      }, 1500);
+    }, 65);
+  }, lastCharacterDelay - 100);
+
+  const contentRevealDelay = lastCharacterDelay + 200;
+  setTimeout(() => description.classList.add('in'), contentRevealDelay);
+  setTimeout(() => tags.classList.add('in'), contentRevealDelay + 150);
+  setTimeout(() => callToAction.classList.add('in'), contentRevealDelay + 300);
+
+  statCards.forEach((statCard, index) => {
+    setTimeout(() => {
+      statCard.classList.add('in');
+      animateStatNumber(statCard);
+    }, contentRevealDelay + 400 + index * 140);
   });
 })();
 
-/* ══ SCROLL REVEAL (IntersectionObserver) ══ */
-(function(){
-  /* fade-up */
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
-  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+/* ══ SCROLL REVEAL & SKILL BARS ══ */
+(function initScrollReveal() {
+  const fadeUpElements = document.querySelectorAll('.fade-up');
+  const skillBars = document.querySelectorAll('.skill-bar');
+  const skillsGrid = document.getElementById('skillsGrid');
 
-  /* skill bars */
-  const sObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.querySelectorAll('.skill-bar').forEach(b=>{b.style.transition='width 1s ease';b.style.width=b.dataset.w+'%'});
-        sObs.unobserve(e.target);
-      }
+  document.querySelectorAll('.skill-item').forEach((item) => {
+    const name = item.querySelector('.skill-name');
+    const bar = item.querySelector('.skill-bar');
+    if (!name || !bar) return;
+
+    bar.setAttribute('role', 'progressbar');
+    bar.setAttribute('aria-label', `${name.textContent.trim()} 숙련도`);
+    bar.setAttribute('aria-valuemin', '0');
+    bar.setAttribute('aria-valuemax', '100');
+    bar.setAttribute('aria-valuenow', bar.dataset.w || '0');
+  });
+
+  function revealAll() {
+    fadeUpElements.forEach((element) => element.classList.add('visible'));
+    skillBars.forEach((bar) => {
+      bar.style.width = `${bar.dataset.w || 0}%`;
     });
-  },{threshold:.2});
-  const sg=document.getElementById('skillsGrid');
-  if(sg)sObs.observe(sg);
+  }
+
+  if (prefersReducedMotion || !supportsIntersectionObserver) {
+    revealAll();
+    return;
+  }
+
+  const fadeObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  fadeUpElements.forEach((element) => fadeObserver.observe(element));
+
+  if (!skillsGrid) return;
+
+  const skillObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.querySelectorAll('.skill-bar').forEach((bar) => {
+        bar.style.transition = 'width 1s ease';
+        bar.style.width = `${bar.dataset.w || 0}%`;
+      });
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  skillObserver.observe(skillsGrid);
 })();
 
 /* ══ WORKS SWIPER ══ */
-(function(){
-  const worksEl=document.getElementById('worksSwiper');
-  if(!worksEl||typeof Swiper==='undefined')return;
+(function initWorksSwiper() {
+  const worksElement = document.getElementById('worksSwiper');
+  if (!worksElement || typeof Swiper === 'undefined') return;
 
-  new Swiper(worksEl,{
-    slidesPerView:1,
-    spaceBetween:14,
-    speed:550,
-    grabCursor:true,
-    pagination:{
-      el:'.works-pagination',
-      clickable:true
+  new Swiper(worksElement, {
+    slidesPerView: 1,
+    spaceBetween: 14,
+    speed: 550,
+    grabCursor: true,
+    pagination: {
+      el: '.works-pagination',
+      clickable: true
     },
-    navigation:{
-      nextEl:'.works-next',
-      prevEl:'.works-prev'
+    navigation: {
+      nextEl: '.works-next',
+      prevEl: '.works-prev'
     },
-    breakpoints:{
-      768:{slidesPerView:1.2,spaceBetween:16},
-      1024:{slidesPerView:2,spaceBetween:18},
-      1400:{slidesPerView:2.35,spaceBetween:20}
+    breakpoints: {
+      768: { slidesPerView: 1.2, spaceBetween: 16 },
+      1024: { slidesPerView: 2, spaceBetween: 18 },
+      1400: { slidesPerView: 2.35, spaceBetween: 20 }
     }
   });
 })();
 
+/* ══ ACTIVE NAV ══ */
+(function initActiveNavigation() {
+  if (!supportsIntersectionObserver) return;
 
-/* ══ ACTIVE NAV via IntersectionObserver ══ */
-(function(){
-  const sections=['hero','projects','works','skills','about','contact'];
-  const navLinks=document.querySelectorAll('.nav-links a');
-  const sideDots=document.querySelectorAll('.side-dot');
+  const sectionIds = ['hero', 'projects', 'works', 'skills', 'about', 'contact'];
+  const navigationLinks = document.querySelectorAll('.nav-links a');
+  const sideDots = document.querySelectorAll('.side-dot');
 
-  function setActive(id){
-    navLinks.forEach(a=>{
-      const href=a.getAttribute('href').replace('#','');
-      a.classList.toggle('active',href===id);
-    });
-    sideDots.forEach(d=>d.classList.toggle('active',d.dataset.target===id));
+  function updateLinkState(link, isActive) {
+    link.classList.toggle('active', isActive);
+    if (isActive) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
   }
 
-  /* rootMargin: 위 nav 높이만큼 offset */
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting)setActive(e.target.id)});
-  },{rootMargin:`-${getComputedStyle(document.documentElement).getPropertyValue('--nav-h')} 0px -50% 0px`,threshold:0});
-
-  sections.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el)});
-
-  /* side dot 클릭 → 해당 섹션으로 스크롤 */
-  sideDots.forEach(d=>{
-    d.addEventListener('click',()=>{
-      const el=document.getElementById(d.dataset.target);
-      if(el)el.scrollIntoView({behavior:'smooth'});
+  function setActiveSection(sectionId) {
+    navigationLinks.forEach((link) => {
+      const targetId = link.getAttribute('href')?.replace('#', '');
+      updateLinkState(link, targetId === sectionId);
     });
+
+    sideDots.forEach((dot) => {
+      updateLinkState(dot, dot.dataset.target === sectionId);
+    });
+  }
+
+  const navigationHeight = getComputedStyle(document.documentElement)
+    .getPropertyValue('--nav-h')
+    .trim();
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) setActiveSection(entry.target.id);
+    });
+  }, {
+    rootMargin: `-${navigationHeight} 0px -50% 0px`,
+    threshold: 0
+  });
+
+  sectionIds.forEach((sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) sectionObserver.observe(section);
   });
 })();
 
-/* ══ HAMBURGER ══ */
-(function(){
-  const hamburger=document.getElementById('hamburger');
-  const navDrawer=document.getElementById('navDrawer');
-  hamburger.addEventListener('click',()=>{
-    const isOpen=hamburger.classList.toggle('open');
-    navDrawer.classList.toggle('open',isOpen);
-    hamburger.setAttribute('aria-expanded',isOpen);
-    navDrawer.setAttribute('aria-hidden',!isOpen);
-    document.body.style.overflow=isOpen?'hidden':'';
+/* ══ MOBILE NAVIGATION ══ */
+(function initMobileNavigation() {
+  const menuButton = document.getElementById('hamburger');
+  const navigationDrawer = document.getElementById('navDrawer');
+  if (!menuButton || !navigationDrawer) return;
+
+  function setDrawerState(isOpen, { restoreFocus = false } = {}) {
+    menuButton.classList.toggle('open', isOpen);
+    navigationDrawer.classList.toggle('open', isOpen);
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+    menuButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+    navigationDrawer.setAttribute('aria-hidden', String(!isOpen));
+    navigationDrawer.inert = !isOpen;
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+
+    if (restoreFocus) menuButton.focus();
+  }
+
+  menuButton.addEventListener('click', () => {
+    const shouldOpen = menuButton.getAttribute('aria-expanded') !== 'true';
+    setDrawerState(shouldOpen);
   });
-  navDrawer.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click',()=>{
-      hamburger.classList.remove('open');
-      navDrawer.classList.remove('open');
-      hamburger.setAttribute('aria-expanded','false');
-      navDrawer.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-    });
+
+  navigationDrawer.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setDrawerState(false));
   });
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'&&navDrawer.classList.contains('open')){
-      hamburger.classList.remove('open');
-      navDrawer.classList.remove('open');
-      hamburger.setAttribute('aria-expanded','false');
-      navDrawer.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
+
+  document.addEventListener('keydown', (event) => {
+    if (!navigationDrawer.classList.contains('open')) return;
+
+    if (event.key === 'Escape') {
+      setDrawerState(false, { restoreFocus: true });
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+
+    const focusableElements = [
+      menuButton,
+      ...navigationDrawer.querySelectorAll('a')
+    ];
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements.at(-1);
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
     }
   });
 })();
 
 /* ══ CONTACT VISITOR COUNTER ══ */
-(function(){
-  const yesterdayEl=document.getElementById('visitorYesterday');
-  const todayEl=document.getElementById('visitorToday');
-  if(!yesterdayEl||!todayEl)return;
+(function initVisitorCounter() {
+  const yesterdayElement = document.getElementById('visitorYesterday');
+  const todayElement = document.getElementById('visitorToday');
+  if (!yesterdayElement || !todayElement) return;
 
-  const KEY='portfolioVisitorCounterDaily';
-  const now=new Date();
-  const todayKey=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  const storageKey = 'portfolioVisitorCounterDaily';
+  const now = new Date();
+  const todayKey = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join('-');
 
-  let state={date:todayKey,today:0,yesterday:0};
-  try{
-    const saved=JSON.parse(localStorage.getItem(KEY)||'null');
-    if(saved&&typeof saved==='object'){
-      const savedToday=Number(saved.today);
-      const savedYesterday=Number(saved.yesterday);
-      state={
-        date:typeof saved.date==='string'?saved.date:todayKey,
-        today:Number.isFinite(savedToday)&&savedToday>=0?Math.floor(savedToday):0,
-        yesterday:Number.isFinite(savedYesterday)&&savedYesterday>=0?Math.floor(savedYesterday):0
+  let state = { date: todayKey, today: 0, yesterday: 0 };
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+
+    if (saved && typeof saved === 'object') {
+      const savedToday = Number(saved.today);
+      const savedYesterday = Number(saved.yesterday);
+
+      state = {
+        date: typeof saved.date === 'string' ? saved.date : todayKey,
+        today: Number.isFinite(savedToday) && savedToday >= 0
+          ? Math.floor(savedToday)
+          : 0,
+        yesterday: Number.isFinite(savedYesterday) && savedYesterday >= 0
+          ? Math.floor(savedYesterday)
+          : 0
       };
     }
-  }catch(_){/* ignore invalid storage */}
 
-  if(state.date!==todayKey){
-    state={date:todayKey,today:1,yesterday:state.today};
-  }else{
-    state.today+=1;
+    state = state.date === todayKey
+      ? { ...state, today: state.today + 1 }
+      : { date: todayKey, today: 1, yesterday: state.today };
+
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  } catch (_error) {
+    // 저장소 접근이 제한된 환경에서는 기본값을 표시합니다.
   }
 
-  localStorage.setItem(KEY,JSON.stringify(state));
-
-  yesterdayEl.textContent=state.yesterday.toLocaleString('ko-KR')+'명';
-  todayEl.textContent=state.today.toLocaleString('ko-KR')+'명';
+  yesterdayElement.textContent = `${state.yesterday.toLocaleString('ko-KR')}명`;
+  todayElement.textContent = `${state.today.toLocaleString('ko-KR')}명`;
 })();

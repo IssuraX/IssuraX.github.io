@@ -3,9 +3,42 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
-  <title>Wekeep 홈페이지 리뉴얼 | 신동혁 Portfolio</title>
-  <meta name="description" content="자체 서비스 홈페이지 리뉴얼: 반응형 UI 구현, SCSS 구조화, 템플릿화"/>
-  <link rel="stylesheet" href="../css/projects.css?v=20260302">
+  <title>Wekeep 홈페이지 리뉴얼 | 신동혁 포트폴리오</title>
+  <meta name="description" content="Wekeep 홈페이지의 반응형 UI를 구축하고 SCSS 구조화와 공통 템플릿으로 제작·유지보수 효율을 개선한 사례입니다."/>
+  <meta name="robots" content="index,follow,max-image-preview:large"/>
+  <meta name="theme-color" content="#f7fbff"/>
+  <link rel="canonical" href="https://issurax.github.io/projects/wekeep.html"/>
+  <meta property="og:title" content="Wekeep 홈페이지 리뉴얼"/>
+  <meta property="og:description" content="SCSS 구조화, 공통 템플릿, 반응형 UI 구축 사례"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://issurax.github.io/projects/wekeep.html"/>
+  <meta property="og:site_name" content="신동혁 Web Publisher Portfolio"/>
+  <meta property="og:locale" content="ko_KR"/>
+  <meta property="og:image" content="https://issurax.github.io/assets/pj003.jpg"/>
+  <meta property="og:image:width" content="1600"/>
+  <meta property="og:image:height" content="763"/>
+  <meta property="og:image:alt" content="Wekeep 홈페이지 리뉴얼 화면"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Wekeep 홈페이지 리뉴얼"/>
+  <meta name="twitter:description" content="SCSS 구조화와 공통 템플릿으로 확장성을 개선한 반응형 리뉴얼"/>
+  <meta name="twitter:image" content="https://issurax.github.io/assets/pj003.jpg"/>
+  <meta name="twitter:image:alt" content="Wekeep 홈페이지 리뉴얼 화면"/>
+  <link rel="stylesheet" href="../css/projects.css?v=20260717">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Wekeep 홈페이지 리뉴얼",
+    "url": "https://issurax.github.io/projects/wekeep.html",
+    "description": "반응형 UI 구축, SCSS 구조화, 공통 템플릿 적용 사례",
+    "image": "https://issurax.github.io/assets/pj003.jpg",
+    "dateCreated": "2022-12",
+    "dateModified": "2026-07-17",
+    "inLanguage": "ko-KR",
+    "keywords": ["웹 퍼블리싱", "홈페이지 리뉴얼", "SCSS", "반응형", "템플릿"],
+    "author": {"@type": "Person", "name": "신동혁", "url": "https://issurax.github.io/"}
+  }
+  </script>
 </head>
 <body>
 <a href="#project-content" class="skip-nav">본문 바로가기</a>
@@ -17,11 +50,11 @@
     <li><a href="../index.html#about">About</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
-    <span></span><span></span><span></span>
+  <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navDrawer">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
 </nav>
-<nav class="nav-drawer" id="navDrawer" aria-label="모바일 메뉴" aria-hidden="true">
+<nav class="nav-drawer" id="navDrawer" aria-label="모바일 메뉴" aria-hidden="true" inert>
   <ul>
     <li><a href="../index.html#projects">Projects</a></li>
     <li><a href="../index.html#skills">Skills</a></li>
@@ -36,7 +69,7 @@
       <p class="breadcrumb"><a href="../index.html#projects">← Projects</a></p>
       <div class="proj-hero-inner">
         <div>
-          <p class="proj-category">02 · 리뉴얼</p>
+          <p class="proj-category">03 · 리뉴얼</p>
           <h1 class="proj-title fade-up">Wekeep<br/>홈페이지<br/>리뉴얼</h1>
           <p class="proj-subtitle fade-up">구조 설계 · 템플릿화 · 반응형</p>
           <div class="proj-tags fade-up">
@@ -49,10 +82,10 @@
             <span><strong>기간</strong> 2022.12 — 2023.01</span>
             <span><strong>소속</strong> 위킵(주)</span>
             <span><strong>역할</strong> 퍼블리싱</span>
-            <span><strong>기여도</strong> 100%</span>
+            <span><strong>담당 범위</strong> 리뉴얼 화면 구현</span>
           </div>
         </div>
-        <div class="proj-index">02</div>
+        <div class="proj-index">03</div>
       </div>
     </div>
   </div>
@@ -66,6 +99,11 @@
           <p>자사 홈페이지 리뉴얼 과정에서 반응형 UI를 구축하고, SCSS 구조화와 공통 템플릿을 도입해 유지보수성과 제작 효율을 개선했습니다.</p>
           <p>단순 리뉴얼에 그치지 않고 이후 콘텐츠 추가·변경 시 빠르게 대응할 수 있는 확장 가능한 퍼블리싱 구조를 구축하는 데 초점을 뒀습니다.</p>
         </div>
+        <dl class="contribution-grid" aria-label="핵심 기여 범위">
+          <div><dt>My Role</dt><dd>리뉴얼 화면 퍼블리싱 담당</dd></div>
+          <div><dt>Deliverables</dt><dd>SCSS 구조·공통 템플릿·반응형 UI</dd></div>
+          <div><dt>Design Goal</dt><dd>콘텐츠 확장과 변경에 대응하는 구조</dd></div>
+        </dl>
       </div>
       <div class="cs-divider"></div>
 
@@ -94,22 +132,23 @@
         <p class="cs-label" data-n="04">Result</p>
         <h2 class="cs-title">결과</h2>
         <ul class="cs-list">
-          <li>신규 페이지 제작 시간 약 30% 단축 — 공통 템플릿 활용으로 반복 작업 감소</li>
+          <li>공통 템플릿 활용으로 반복 작업과 신규 페이지 제작 공수 감소</li>
           <li>모바일 UI 안정성 개선 및 반응형 대응으로 사용자 접근성 향상</li>
           <li>유지보수 효율 향상 — 스타일 구조 명확화로 수정 범위 예측 가능</li>
         </ul>
         <div class="cs-metrics">
           <div class="cs-metric">
-            <div class="cs-metric-num">30%</div>
-            <div class="cs-metric-label">Time Saved</div>
-            <div class="cs-metric-desc">신규 페이지 제작 시간 단축</div>
+            <div class="cs-metric-num">효율</div>
+            <div class="cs-metric-label">Workflow</div>
+            <div class="cs-metric-desc">반복 작업과 제작 공수 감소</div>
           </div>
           <div class="cs-metric">
-            <div class="cs-metric-num">100%</div>
-            <div class="cs-metric-label">Solo Publishing</div>
-            <div class="cs-metric-desc">단독 퍼블리싱 기여도</div>
+            <div class="cs-metric-num">담당</div>
+            <div class="cs-metric-label">Publishing</div>
+            <div class="cs-metric-desc">리뉴얼 화면 퍼블리싱</div>
           </div>
         </div>
+        <p class="evidence-note"><strong>정리 기준</strong> 공통 템플릿 도입과 SCSS 구조 개선 전후의 작업 흐름을 기준으로 정리했습니다.</p>
       </div>
     </main>
 
@@ -119,17 +158,17 @@
         <div class="kv-row"><span class="kv-key">기간</span><span class="kv-val">2022.12 – 2023.01</span></div>
         <div class="kv-row"><span class="kv-key">소속</span><span class="kv-val">위킵(주)</span></div>
         <div class="kv-row"><span class="kv-key">역할</span><span class="kv-val">퍼블리싱</span></div>
-        <div class="kv-row"><span class="kv-key">기여도</span><span class="kv-val">100%</span></div>
+        <div class="kv-row"><span class="kv-key">담당 범위</span><span class="kv-val">리뉴얼 화면 구현</span></div>
         <div class="kv-row"><span class="kv-key">스택</span><span class="kv-val">HTML/CSS(SCSS)<br/>JavaScript/jQuery<br/>Git, Jira/Slack</span></div>
         <div class="kv-row"><span class="kv-key">환경</span><span class="kv-val">자체 서비스</span></div>
       </div>
       <div class="proj-img-wrap fade-up">
-        <img src="../assets/pj003.png" alt="Wekeep 리뉴얼 화면 1" loading="lazy"
+        <img src="../assets/pj003.jpg" alt="Wekeep 리뉴얼 화면 1" width="1600" height="763" loading="lazy" decoding="async"
           onerror="this.parentElement.style.display='none'"/>
         <p class="proj-img-label">리뉴얼 화면 01</p>
       </div>
       <div class="proj-img-wrap fade-up">
-        <img src="../assets/pj004.png" alt="Wekeep 리뉴얼 화면 2" loading="lazy"
+        <img src="../assets/pj004.jpg" alt="Wekeep 리뉴얼 화면 2" width="1600" height="1067" loading="lazy" decoding="async"
           onerror="this.parentElement.style.display='none'"/>
         <p class="proj-img-label">리뉴얼 화면 02</p>
       </div>
@@ -137,22 +176,22 @@
   </div>
 
   <nav class="proj-nav" aria-label="다른 프로젝트">
-    <a href="./deflux.html" class="proj-nav-item">
+    <a href="./logistong.html" class="proj-nav-item">
       <span class="proj-nav-dir">← Prev Project</span>
-      <span class="proj-nav-title">대림 계열사 홈페이지 운영 및 UI 개선</span>
-    </a>
-    <a href="./logistong.html" class="proj-nav-item next">
-      <span class="proj-nav-dir">Next Project →</span>
       <span class="proj-nav-title">Logistong 리뉴얼 퍼블리싱</span>
+    </a>
+    <a href="./deflux.html" class="proj-nav-item next">
+      <span class="proj-nav-dir">Next Project →</span>
+      <span class="proj-nav-title">대림 계열사 홈페이지 운영 및 UI 개선</span>
     </a>
   </nav>
 </div>
 
 <footer>
-  <span>© 2025 신동혁 · Web Publisher Portfolio</span>
+  <span>© <time class="current-year" datetime="2026">2026</time> 신동혁 · Web Publisher Portfolio</span>
   <span><a href="../index.html" style="color:var(--dim);text-decoration:none">← Back to Home</a></span>
 </footer>
 
-<script src="../js/projects.js?v=20260302"></script>
+<script src="../js/projects.js?v=20260717"></script>
 </body>
 </html>

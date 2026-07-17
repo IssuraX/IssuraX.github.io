@@ -1,13 +1,87 @@
-/* fade-up */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
-},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+const prefersReducedMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
+const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
-/* hamburger */
-(function(){
-  const h=document.getElementById('hamburger'),d=document.getElementById('navDrawer');
-  h.addEventListener('click',()=>{const o=h.classList.toggle('open');d.classList.toggle('open',o);h.setAttribute('aria-expanded',o);d.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''});
-  d.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{h.classList.remove('open');d.classList.remove('open');h.setAttribute('aria-expanded','false');d.setAttribute('aria-hidden','true');document.body.style.overflow=''}));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){h.classList.remove('open');d.classList.remove('open');h.setAttribute('aria-expanded','false');d.setAttribute('aria-hidden','true');document.body.style.overflow=''}});
+document.querySelectorAll('.current-year').forEach((element) => {
+  const year = String(new Date().getFullYear());
+  element.textContent = year;
+  element.setAttribute('datetime', year);
+});
+
+/* ══ SCROLL REVEAL ══ */
+(function initScrollReveal() {
+  const fadeUpElements = document.querySelectorAll('.fade-up');
+
+  if (prefersReducedMotion || !supportsIntersectionObserver) {
+    fadeUpElements.forEach((element) => element.classList.add('visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      currentObserver.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  fadeUpElements.forEach((element) => observer.observe(element));
+})();
+
+/* ══ MOBILE NAVIGATION ══ */
+(function initMobileNavigation() {
+  const menuButton = document.getElementById('hamburger');
+  const navigationDrawer = document.getElementById('navDrawer');
+  if (!menuButton || !navigationDrawer) return;
+
+  function setDrawerState(isOpen, { restoreFocus = false } = {}) {
+    menuButton.classList.toggle('open', isOpen);
+    navigationDrawer.classList.toggle('open', isOpen);
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+    menuButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+    navigationDrawer.setAttribute('aria-hidden', String(!isOpen));
+    navigationDrawer.inert = !isOpen;
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+
+    if (restoreFocus) menuButton.focus();
+  }
+
+  menuButton.addEventListener('click', () => {
+    const shouldOpen = menuButton.getAttribute('aria-expanded') !== 'true';
+    setDrawerState(shouldOpen);
+  });
+
+  navigationDrawer.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setDrawerState(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!navigationDrawer.classList.contains('open')) return;
+
+    if (event.key === 'Escape') {
+      setDrawerState(false, { restoreFocus: true });
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+
+    const focusableElements = [
+      menuButton,
+      ...navigationDrawer.querySelectorAll('a')
+    ];
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements.at(-1);
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  });
 })();
