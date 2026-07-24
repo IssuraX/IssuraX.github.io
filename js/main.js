@@ -1,7 +1,10 @@
 /* JS 활성화 표시 (fade-up 애니메이션 활성화) */
+const $ = (selector, scope = document) => scope.querySelector(selector);
+const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
 document.documentElement.classList.replace('no-js', 'js-ready');
 
-document.querySelectorAll('.current-year').forEach((element) => {
+$$('.current-year').forEach((element) => {
   const year = String(new Date().getFullYear());
   element.textContent = year;
   element.setAttribute('datetime', year);
@@ -15,8 +18,8 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
 /* ══ PARTICLE CANVAS ══ */
 (function initParticleCanvas() {
-  const canvas = document.getElementById('hero-canvas');
-  const hero = document.getElementById('hero');
+  const canvas = $('#hero-canvas');
+  const hero = $('#hero');
 
   if (!canvas || !hero || prefersReducedMotion || usesCoarsePointer) return;
 
@@ -180,8 +183,8 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
 /* ══ GLOW FOLLOW ══ */
 (function initGlowFollow() {
-  const glow = document.getElementById('hero-glow');
-  const hero = document.getElementById('hero');
+  const glow = $('#hero-glow');
+  const hero = $('#hero');
 
   if (!glow || !hero || prefersReducedMotion || usesCoarsePointer) return;
 
@@ -219,7 +222,7 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
 (function initHeroParallax() {
   if (prefersReducedMotion || usesCoarsePointer) return;
 
-  const hero = document.getElementById('hero');
+  const hero = $('#hero');
   if (!hero) return;
 
   const leftColumn = hero.querySelector('.hero-left');
@@ -249,19 +252,19 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
 /* ══ HERO TEXT ANIMATIONS ══ */
 (function initHeroTextAnimations() {
-  const label = document.getElementById('heroLabel');
-  const nameWrapper = document.getElementById('heroNameWrap');
-  const nameCharacters = document.getElementById('heroNameChars');
-  const role = document.getElementById('heroRole');
-  const roleText = document.getElementById('heroRoleText');
-  const roleCursor = document.getElementById('heroRoleCursor');
-  const description = document.getElementById('heroDesc');
-  const tags = document.getElementById('heroTags');
-  const callToAction = document.getElementById('heroCta');
+  const label = $('#heroLabel');
+  const nameWrapper = $('#heroNameWrap');
+  const nameCharacters = $('#heroNameChars');
+  const role = $('#heroRole');
+  const roleText = $('#heroRoleText');
+  const roleCursor = $('#heroRoleCursor');
+  const description = $('#heroDesc');
+  const tags = $('#heroTags');
+  const callToAction = $('#heroCta');
   const statCards = [
-    document.getElementById('sc1'),
-    document.getElementById('sc2'),
-    document.getElementById('sc3')
+    $('#sc1'),
+    $('#sc2'),
+    $('#sc3')
   ].filter(Boolean);
 
   const requiredElements = [
@@ -416,11 +419,11 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
 /* ══ SCROLL REVEAL & SKILL BARS ══ */
 (function initScrollReveal() {
-  const fadeUpElements = document.querySelectorAll('.fade-up');
-  const skillBars = document.querySelectorAll('.skill-bar');
-  const skillsGrid = document.getElementById('skillsGrid');
+  const fadeUpElements = $$('.fade-up');
+  const skillBars = $$('.skill-bar');
+  const skillsGrid = $('#skillsGrid');
 
-  document.querySelectorAll('.skill-item').forEach((item) => {
+  $$('.skill-item').forEach((item) => {
     const name = item.querySelector('.skill-name');
     const bar = item.querySelector('.skill-bar');
     if (!name || !bar) return;
@@ -476,7 +479,7 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
 /* ══ WORKS SWIPER ══ */
 (function initWorksSwiper() {
-  const worksElement = document.getElementById('worksSwiper');
+  const worksElement = $('#worksSwiper');
   if (!worksElement || typeof Swiper === 'undefined') return;
 
   new Swiper(worksElement, {
@@ -505,8 +508,8 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
   if (!supportsIntersectionObserver) return;
 
   const sectionIds = ['hero', 'projects', 'works', 'skills', 'about', 'contact'];
-  const navigationLinks = document.querySelectorAll('.nav-links a');
-  const sideDots = document.querySelectorAll('.side-dot');
+  const navigationLinks = $$('.nav-links a');
+  const sideDots = $$('.side-dot');
 
   function updateLinkState(link, isActive) {
     link.classList.toggle('active', isActive);
@@ -539,15 +542,15 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
   });
 
   sectionIds.forEach((sectionId) => {
-    const section = document.getElementById(sectionId);
+    const section = $(`#${sectionId}`);
     if (section) sectionObserver.observe(section);
   });
 })();
 
 /* ══ MOBILE NAVIGATION ══ */
 (function initMobileNavigation() {
-  const menuButton = document.getElementById('hamburger');
-  const navigationDrawer = document.getElementById('navDrawer');
+  const menuButton = $('#hamburger');
+  const navigationDrawer = $('#navDrawer');
   if (!menuButton || !navigationDrawer) return;
 
   function setDrawerState(isOpen, { restoreFocus = false } = {}) {
@@ -600,8 +603,8 @@ const supportsIntersectionObserver = 'IntersectionObserver' in window;
 
 /* ══ CONTACT VISITOR COUNTER ══ */
 (function initVisitorCounter() {
-  const yesterdayElement = document.getElementById('visitorYesterday');
-  const todayElement = document.getElementById('visitorToday');
+  const yesterdayElement = $('#visitorYesterday');
+  const todayElement = $('#visitorToday');
   if (!yesterdayElement || !todayElement) return;
 
   const storageKey = 'portfolioVisitorCounterDaily';
